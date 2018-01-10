@@ -1,0 +1,149 @@
+{
+  "app": {
+	"generator_version": "1.0.0",
+	"generator_version_release_dates": {
+	  "1.0.0": "11/13/2017"
+	},
+	"key": "val",
+	"field_defaults": {
+	  "desc": "",
+	  "default": "",
+	  "placehold": "",
+	  "saved": "",
+	  "choices": {},
+	  "html_pre": "",
+	  "html_post": "",
+	  "hide_label": false,
+	  "atts_wrap": {},
+	  "atts_field": {}
+	}
+  },
+  "fields": [
+	{
+	  "type": "input",
+	  "inputType": "text",
+	  "key": "plugin_name",
+	  "label": "Name",
+	  "default": "My Plugin",
+	  "placehold": "Ex. Video Library"
+	},
+	{
+	  "type": "textarea",
+	  "inputType": "textarea",
+	  "key": "plugin_description",
+	  "label": "Description",
+	  "default": "My really great plugin.",
+	  "placehold": "Short description for plugin..."
+	},
+	{
+	  "type": "input",
+	  "inputType": "text",
+	  "key": "plugin_authors",
+	  "label": "Author(s)",
+	  "default": "",
+	  "placehold": "First Lastname"
+	},
+	{
+	  "type": "radios",
+	  "key": "plugin_arch_type",
+	  "label": "Plugin Type",
+	  "choices": {
+		"simple": "Simple",
+		"standard": "Standard"
+	  },
+	  "desc": "",
+	  "default": "standard",
+	  "placehold": "standard"
+	},
+	{
+	  "type": "radios",
+	  "key": "plugin_license",
+	  "label": "Plugin License",
+	  "choices": {
+		"gpl": "GPL V2+",
+		"private": "Private"
+	  },
+	  "default": "gpl",
+	  "placehold": "gpl"
+	},
+	{
+	  "type": "input",
+	  "inputType": "text",
+	  "key": "plugin_primary_namespace",
+	  "label": "Primary Namespace",
+	  "default": "",
+	  "placehold": ""
+	},
+	{
+	  "type": "input",
+	  "inputType": "text",
+	  "key": "plugin_secondary_namespace",
+	  "label": "Secondary Namespace",
+	  "default": "",
+	  "placehold": ""
+	},
+	{
+	  "type": "input",
+	  "inputType": "checkbox",
+	  "key": "builder_show_adv",
+	  "label": "Show Advanced Options",
+	  "desc": "Modify periphery defaults and include additional code",
+	  "default": "false",
+	  "placehold": ""
+	},
+
+	{
+	  "type": "radios",
+	  "key": "plugin_autoload",
+	  "label": "Dependency Loader",
+	  "choices": {
+		"manual": "Manual"
+	  },
+	  "desc": "Loader for 3rd party dependency packages <small>(doesn't affect default PSR-4 plugin file autoloading)</small>",
+	  "default": "manual",
+	  "placehold": "manual"
+	},
+
+	{
+	  "type": "input",
+	  "inputType": "text",
+	  "key": "plugin_ver",
+	  "label": "Version",
+	  "default": "0.1.0",
+	  "placehold": "0.1.0"
+	},
+	{
+	  "type": "input",
+	  "inputType": "text",
+	  "key": "plugin_teamorg",
+	  "label": "Author's Team or Org Name",
+	  "default": "",
+	  "placehold": "WordPress Phoenix or perhaps PHX Engineering Team"
+	},
+	{
+	  "type": "input",
+	  "inputType": "text",
+	  "key": "plugin_repo_url",
+	  "label": "GitHub Repo URL",
+	  "desc": "What is your github plugin URL?",
+	  "default": "http://github.com/wordpress-phoenix",
+	  "placehold": "https://github.com/wordpress-phoenix/your-plugin-repo"
+	},
+	{
+	  "type": "input",
+	  "inputType": "checkbox",
+	  "key": "plugin_opts_panel",
+	  "label": "Include Options Panel",
+	  "desc": "Include and initialize an options panel to configure.",
+	  "default": "false"
+	},
+	{
+	  "type": "input",
+	  "inputType": "checkbox",
+	  "key": "plugin_register_enqueue_assets",
+	  "label": "Register and Enqueue Assets",
+	  "desc": "Provide CSS and JavaScript files for public and authenticated use.",
+	  "default": "true"
+	}
+  ]
+}

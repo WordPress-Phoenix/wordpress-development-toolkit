@@ -1,0 +1,25 @@
+{
+  "cards": [
+	{
+	  "title": "Tools",
+	  "slug": "tools",
+	  "description": "",
+	  "dashicon": "vault",
+	  "contentTmpl": "wp-phx-tools"
+	},
+	{
+	  "title": "Enterprise Standards & Best Practices",
+	  "slug": "wp-phx-standards-best-practices",
+	  "description": "Coming soon",
+	  "dashicon": "wordpress-alt",
+	  "contentTmpl": ""
+	},
+	{
+	  "title": "Guides & Glossaries",
+	  "slug": "guides-glossaries",
+	  "description": "Coming Soon: Helpful resources for WordPress Development",
+	  "dashicon": "book-alt",
+	  "contentTmpl": "wp-phx-guides-glossaries"
+	}
+  ]
+}

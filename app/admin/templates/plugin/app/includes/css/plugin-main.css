@@ -1,0 +1,5 @@
+/**
+ * ||PLUGIN_PACKAGE|| Main Stylesheet
+ * Initialize with wp_enqueue_style( '||PLUGIN_SLUG||-main' );
+ * @see app/includes/class-assets.php
+ */

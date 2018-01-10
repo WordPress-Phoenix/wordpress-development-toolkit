@@ -1,0 +1,115 @@
+#generator-app {
+	display: none;
+}
+
+.generator-input {
+	max-width: 50vw;
+}
+
+td.primary {
+	max-width:180px;
+}
+
+#generator-head {
+	background:#666666;
+	padding: 1.33rem;
+	min-height:200px
+}
+
+#generator-head h1 {
+	text-align:center;
+	width:100%;
+}
+
+#generator-head div {
+	color: #eee !important;
+}
+
+#generator-features {
+	color:#eee;
+	font-size:14px;
+	list-style-type:decimal;
+	display:table;
+}
+
+#generator-features li {
+	margin-left: 3rem;
+}
+
+#gen-button-wrap {
+	margin:2rem auto;
+	text-align:center;
+}
+
+
+#plugin_opts_panel_type-wrap,
+#plugin_autoload-wrap,
+#plugin_ver-wrap,
+#plugin_teamorg-wrap,
+#plugin_repo_url-wrap,
+#plugin_opts_panel-wrap,
+#plugin_rest_api-wrap,
+#plugin_admin_pages-wrap,
+#plugin_admin_blank-wrap,
+#plugin_register_enqueue_assets-wrap {
+	display: none;
+}
+
+
+.onoffswitch-wrap {
+	min-height: 50px;
+	float: right;
+	padding:0.2rem;
+	vertical-align: middle;
+}
+
+.onoffswitch {
+	position: relative;
+	width: 86px;
+	-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+div.onoffswitch input[type="checkbox"] {
+	display: none;
+}
+.onoffswitch-label {
+	display: block; overflow: hidden; cursor: pointer;
+	border: 2px solid #999999; border-radius: 50px;
+}
+.onoffswitch-inner {
+	display: block; width: 200%; margin-left: -100%;
+	transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+	display: block; float: left; width: 50%; height: 24px; padding: 0; line-height: 24px;
+	font-size: 18px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+	box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+	content: "YES";
+	font-size: 0.9rem;
+	padding-left: 12px;
+	background-color: #1486B8;
+	color: #edf1f4;
+}
+.onoffswitch-inner:after {
+	content: "NO";
+	font-size: 0.9rem;
+	padding-right: 12px;
+	background-color: #EEEEEE; color: #999999;
+	text-align: right;
+}
+.onoffswitch-switch {
+	display: block; width: 31px; margin: -3.5px;
+	background: #FFFFFF;
+	position: absolute; top: 0; bottom: 0;
+	right: 58px;
+	border: 2px solid #999999; border-radius: 50px;
+	transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+	margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+	right: 0px;
+}
+

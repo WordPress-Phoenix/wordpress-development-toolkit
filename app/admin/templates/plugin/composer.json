@@ -1,0 +1,11 @@
+{
+  "require-dev": {
+	"wp-coding-standards/wpcs": "^0.10"
+  },
+  "scripts": {
+	"test": "composer lint",
+	"lint": "./vendor/bin/phpcs --standard=./phpcs.xml --extensions='php,js,css' ./",
+	"post-install-cmd": "./vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/",
+	"post-update-cmd": "./vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
+  }
+}

@@ -1,0 +1,5 @@
+/**
+ * ||PLUGIN_PACKAGE|| Admin Stylesheet
+ * Scope & then init with wp_enqueue_script( '||PLUGIN_SLUG||-admin' );
+ * @see app/admin/class-assets.php
+ */
