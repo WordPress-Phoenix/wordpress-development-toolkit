@@ -2,7 +2,7 @@
 
 namespace ||PLUGIN_PRIMARY_NAMESPACE||\||PLUGIN_SECONDARY_NAMESPACE||\Admin;
 
-use WPOP\V_2_8 as Opts;
+use WPOP\V_2_9 as Opts;
 
 /**
  * Class Options_Panel

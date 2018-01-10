@@ -11,7 +11,7 @@
  * Plugin URI:  ||PLUGIN_GITHUB_REPO||
  * Description: ||PLUGIN_DESC||
  * Version:     ||PLUGIN_VER||
- * Author:      ||PLUGIN_AUTHORS|| ||PLUGIN_TEAM||
+ * Author:      ||PLUGIN_AUTHORS|| ||PLUGIN_TEAM_DASH||
  * Text Domain: ||PLUGIN_SLUG||
  * License:     ||PLUGIN_LICENSE_TEXT||
  */
