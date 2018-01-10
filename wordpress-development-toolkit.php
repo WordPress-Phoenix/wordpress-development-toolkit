@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Development Toolkit
  * Plugin URI: https://github.com/wordpress-phoenix/development-toolkit
  * Author: David Ryan
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 
 /**
