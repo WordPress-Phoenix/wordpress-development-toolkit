@@ -1,0 +1,7 @@
+{
+    "require": {
+        "WordPress-Phoenix/abstract-plugin-base": "^2.5",
+        "WordPress-Phoenix/wordpress-phoenix-options-panel": "^2.8",
+        "league/commonmark": "^0.16.0"
+    }
+}
