@@ -86,7 +86,7 @@ class Plugin_Generator_Form {
 						<div>
 							<img src="https://robohash.org/wp-phx-plugin-machine" width="200px" height="200px"
 							     style="float:left;"/>
-							<h2 style="color:#eee;">Hey David!</h2>
+							<h2 style="color:#eee;">Hey <?php echo wp_get_current_user()->display_name; ?>!</h2>
 							<h3 style="color:#eee;">Lets scaffold a new WordPress Plugin.</h3>
 						</div>
 					</section>

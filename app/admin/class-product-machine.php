@@ -15,11 +15,11 @@ class Product_Machine {
 	/**
 	 * Product_Machine constructor.
 	 *
-	 * @param $filename
-	 * @param $origin_dir
-	 * @param $tmp_dir
-	 * @param $data
-	 * @param $config
+	 * @param string $filename
+	 * @param string $origin_dir
+	 * @param string $tmp_dir
+	 * @param array $data
+	 * @param array $config
 	 */
 	public function __construct( $filename, $origin_dir, $tmp_dir, $data, $config ) {
 		add_filter( 'wp_phx_plugingen_file_contents', array( $this, 'process_file_contents_via_filter' ) );
@@ -27,6 +27,9 @@ class Product_Machine {
 	}
 
 	/**
+	 * Create a .ZIP download for the plugin generator
+	 * @todo: abstract to use for multiple generators
+	 *
 	 * @param $filename
 	 * @param $origin_dir
 	 * @param $tmp_dir
@@ -42,18 +45,21 @@ class Product_Machine {
 			ZipArchive::CREATE && ZipArchive::OVERWRITE
 		);
 
+		// check we have filesystem write access
 		if ( $creation_success ) {
-			$zip->addFromString( 'plugin-data.json', json_encode( $data ) );
+			// write json containing configuration data
+			$zip->addFromString( 'plugin-data.json', json_encode( array( 'data' => $data, 'config' => $config ) ) );
 			// maybe include license
 			if ( 'gpl' === $data['plugin_license'] ) {
 				$zip->addFromString( 'LICENSE', file_get_contents( dirname( __FILE__ ) . '/templates/gpl.txt' ) );
 			}
+			// find every file within origin directory including nested files
 			$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $origin_dir ) );
 			foreach ( $iterator as $current_file ) {
 				if ( !! stristr( strval( $current_file ), 'ds_store' ) ) {
-					continue;
+					continue; // skip system files
 				}
-				if ( (
+				if ( ( // no assets or simple build AND is .css, .js or class-assets.php, then skip
 					   ! isset( $data['plugin_register_enqueue_assets'] )
 				       || 'simple' === $data['plugin_arch_type']
 				     )
@@ -65,6 +71,7 @@ class Product_Machine {
 				) {
 					continue;
 				}
+				// if simple AND isn't main.php, class-plugin.php or in wpphx dir, then skip
 				if ( 'simple' === $data['plugin_arch_type']
 				     && (
 				     	! stristr( strval( $current_file ), 'main.php' )
@@ -74,13 +81,13 @@ class Product_Machine {
 				) {
 					continue;
 				}
-				// give file relative path for zip
+				// VITAL FOR ALL FILES: give file relative path for zip
 				$current_file_stub = str_replace( trailingslashit( $origin_dir ), '', $current_file );
-				// run operations on file
+				// Run WordPress Filter on File
 				$processed_file = apply_filters( 'wp_phx_plugingen_file_contents', [
-					'contents' => file_get_contents( $current_file ),
-					'filename' => $current_file_stub,
-					'data'     => $data,
+					'contents' => file_get_contents( $current_file ), // modified
+					'filename' => $current_file_stub, // modified
+					'data'     => $data, // data passthru, for read only
 				] );
 				// add maybe renamed, maybe rebuilt file to new zip
 				if ( is_array( $processed_file ) && ! empty( $processed_file['contents'] ) && is_string( $processed_file['contents'] ) ) {
@@ -96,6 +103,7 @@ class Product_Machine {
 				$zip->addFromString( 'app' . $idx, $blank_file );
 				$zip->addFromString( 'vendor' . $idx, $blank_file );
 				$zip->addFromString( 'app/admin' . $idx, $blank_file );
+				$zip->addFromString( 'app/assets' . $idx, $blank_file );
 				$zip->addFromString( 'app/includes' . $idx, $blank_file );
 
 				// include options panel
@@ -105,10 +113,6 @@ class Product_Machine {
 						file_get_contents( dirname( __FILE__ ) . '/templates/wpop.php' )
 					);
 				}
-			}
-
-			if ( ! empty( $config ) && is_array( $config ) ) {
-				$zip->addFromString( 'plugin-generated.json', json_encode( $config ) );
 			}
 
 			// close zip
@@ -151,42 +155,83 @@ class Product_Machine {
 		$d        = $file['data'];
 		$filename = $file['filename'];
 
-		$contents       = str_ireplace( '||PLUGIN_NAME||', $d['plugin_name'], $contents );
-		$contents       = str_ireplace( '||PLUGIN_PRIMARY_NAMESPACE||', $d['plugin_primary_namespace'], $contents );
-		$contents       = str_ireplace( '||PLUGIN_SECONDARY_NAMESPACE||', $d['plugin_secondary_namespace'], $contents );
+		$contents       = str_ireplace( '<%= NAME %>', $d['plugin_name'], $contents );
+		$contents       = str_ireplace( '<%= PRIMARY_NAMESPACE %>', $d['plugin_primary_namespace'], $contents );
+		$contents       = str_ireplace( '<%= SECONDARY_NAMESPACE %>', $d['plugin_secondary_namespace'], $contents );
 		$sanitized_name = sanitize_title_with_dashes( $d['plugin_name'] );
-		$contents       = str_ireplace( '||PLUGIN_SLUG||', $sanitized_name, $contents );
-		$contents       = str_ireplace( '||PLUGIN_PACKAGE||', str_ireplace( '-', '_', ucwords( $sanitized_name ) ), $contents );
+		$contents       = str_ireplace( '<%= SLUG %>', $sanitized_name, $contents );
+		$contents       = str_ireplace( '<%= PKG %>', str_ireplace( '-', '_', ucwords( $sanitized_name ) ), $contents );
 
 		if ( 'main.php' === $filename || 'README.md' === $filename ) {
-			$contents = str_ireplace( '||PLUGIN_AUTHORS||', $d['plugin_authors'], $contents );
-			$contents = str_ireplace( '||PLUGIN_TEAM_DASH||', ! empty( $d['plugin_teamorg'] ) ? ' - ' . $d['plugin_teamorg'] : '', $contents );
-			$contents = str_ireplace( '||PLUGIN_LICENSE_TEXT||', self::version_text( $d ), $contents );
-			$contents = str_ireplace( '||PLUGIN_VER||', ! empty( $d['plugin_ver'] ) ? $d['plugin_ver'] : '0.1.0', $contents );
-			$contents = str_ireplace( '||PLUGIN_DESC||', $d['plugin_description'], $contents );
-			$contents = str_ireplace( '||PLUGIN_GITHUB_REPO||', $d['plugin_repo_url'], $contents );
-			$contents = str_ireplace( '||PLUGIN_YEAR||', current_time( "Y" ), $contents );
-			$contents = str_ireplace( '||CURRENT_TIME||', current_time( 'l jS \of F Y h:i:s A' ), $contents );
-			$contents = str_ireplace( '||GENERATOR_VER||', $d['generator_version'], $contents );
-			if ( 'simple' === $d['plugin_arch_type'] || ! isset( $d['plugin_register_enqueue_assets'] ) ) {
-				$contents = str_ireplace( 'new Includes\Init( $this->installed_dir, $this->installed_url );', '', $contents );
-				$contents = str_ireplace( 'new Admin\Init( $this->installed_dir, $this->installed_url );', '', $contents );
+			$contents = str_ireplace( '<%= AUTHORS %>', $d['plugin_authors'], $contents );
+			$contents = str_ireplace( '<%= TEAM %>', ! empty( $d['plugin_teamorg'] ) ? ' - ' . $d['plugin_teamorg'] : '', $contents );
+			$contents = str_ireplace( '<%= LICENSE_TEXT %>', self::version_text( $d ), $contents );
+			$contents = str_ireplace( '<%= VERSION %>', ! empty( $d['plugin_ver'] ) ? $d['plugin_ver'] : '0.1.0', $contents );
+			$contents = str_ireplace( '<%= DESC %>', $d['plugin_description'], $contents );
+			if ( ! empty( $d['plugin_url'] ) ) {
+				$url = $d['plugin_url'];
+			} elseif ( ! empty( $d['plugin_repo_url'] ) ) {
+				$url = $d['plugin_repo_url'];
+			} else {
+				$url = '';
 			}
+			$contents = str_ireplace( '<%= GITHUB_URL %>', $d['plugin_repo_url'], $contents );
+			$contents = str_ireplace( '<%= URL %>', $url, $contents );
+			$contents = str_ireplace( '<%= YEAR %>', current_time( "Y" ), $contents );
+			$contents = str_ireplace( '<%= CURRENT_TIME %>', current_time( 'l jS \of F Y h:i:s A' ), $contents );
+			$contents = str_ireplace( '<%= GENERATOR_VERSION %>', $d['generator_version'], $contents );
+
 			$panel_str = '';
 			if ( isset( $d['plugin_opts_panel'] ) && 'on' === $d['plugin_opts_panel'] ) {
 				$panel_str = "
 				
 // Load Options Panel
-if ( ! class_exists( 'WPOP\\V_2_9\\Page' ) ) {
+if ( ! class_exists( 'WPOP\\\V_2_9\\\Page' ) ) {
 	include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/wordpress-options-builder-class/wordpress-phoenix-options-panel.php';
 }";
 			}
-			$contents = str_ireplace( '||INSTANTIATE_OPTIONS_PANEL||', $panel_str, $contents );
+			$contents = str_ireplace( '<%= INSTANTIATE_OPTIONS_PANEL %>', $panel_str, $contents );
+		}
+
+		if ( stripos( $filename, 'class-plugin.php' ) ) {
+			if ( 'simple' === $d['plugin_arch_type'] ) {
+				$includes_init = '';
+				$admin_init    = '';
+
+			} else {
+				$includes_init = 'new Includes\Init(
+					trailingslashit( $this->installed_dir ),
+					trailingslashit( $this->installed_url ),
+					$this->version
+				);';
+				$admin_init    = 'new Admin\Init(
+					trailingslashit( $this->installed_dir ),
+					trailingslashit( $this->installed_url ),
+					$this->version
+				);';
+			}
+
+			$contents = str_ireplace( '<%= INCLUDES_INIT %>', $includes_init, $contents );
+			$contents = str_ireplace( '<%= ADMIN_INIT %>', $admin_init, $contents );
 		}
 
 		if ( ! isset( $d['plugin_register_enqueue_assets'] ) && stripos( $filename, 'class-init.php' ) ) {
-			$initStr = 'new Assets( $this->installed_dir, $this->installed_url );';
+			$initStr = '
+		// handle global assets
+		new Assets(
+			$this->installed_dir,
+			$this->installed_url,
+			$version
+		);';
 			$contents = str_ireplace( $initStr, '', $contents );
+			$authInit = '
+		// handle authenticated stylesheets and scripts
+		new Auth_Assets(
+			$this->installed_dir,
+			$this->installed_url,
+			$this->version
+		);';
+			$contents = str_ireplace( $authInit, '', $contents );
 		}
 
 		return $contents;

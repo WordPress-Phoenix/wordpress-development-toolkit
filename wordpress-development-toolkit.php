@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Development Toolkit
  * Plugin URI: https://github.com/wordpress-phoenix/development-toolkit
  * Author: David Ryan
- * Version: 1.0.1
+ * Version: 1.1.0
  */
 
 /**
@@ -18,6 +18,11 @@ if ( ! function_exists( 'add_filter' ) ) {
 // fire composer dependencies autoloader, making Abstract_Plugin class and other dependencies available
 if ( ! class_exists( 'WPAZ_Plugin_Base\\V_2_5\\Abstract_Plugin' ) ) {
     include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/abstract-plugin-base/src/abstract-plugin.php';
+}
+
+// Load Options Panel
+if ( ! class_exists( 'WPOP\\V_2_10\\Page' ) ) {
+	include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/wordpress-options-builder-class/wordpress-phoenix-options-panel.php';
 }
 
 // make plugin class available for run below

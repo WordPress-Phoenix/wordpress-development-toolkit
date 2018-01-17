@@ -38,6 +38,14 @@
 	{
 	  "type": "input",
 	  "inputType": "text",
+	  "key": "plugin_url",
+	  "label": "URL",
+	  "default": "",
+	  "placehold": "http://wordpress.org"
+	},
+	{
+	  "type": "input",
+	  "inputType": "text",
 	  "key": "plugin_authors",
 	  "label": "Author(s)",
 	  "default": "",

@@ -1,6 +1,6 @@
 <?php
 
-namespace ||PLUGIN_PRIMARY_NAMESPACE||\||PLUGIN_SECONDARY_NAMESPACE||\Admin;
+namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
 
 use WPOP\V_2_9 as Opts;
 
@@ -8,43 +8,55 @@ use WPOP\V_2_9 as Opts;
  * Class Options_Panel
  */
 class Options_Panel {
+
 	/**
-	 * @var
+	 * @var string
 	 */
 	public $installed_dir;
+
 	/**
-	 * @var
+	 * @var string
 	 */
 	public $installed_url;
 
+	/**
+	 * @var string
+	 */
 	protected $site_options;
 
 	/**
 	 * Options_Panel constructor.
 	 *
-	 * @param $installed_dir
-	 * @param $installed_url
+	 * @param string $installed_dir
+	 * @param string $installed_url
 	 */
 	function __construct( $installed_dir, $installed_url ) {
 		$this->installed_dir = $installed_dir;
 		$this->installed_url = $installed_url;
+
 		$this->setup_site_options();
 	}
+
+	/**
+	 * Register Options Panel
+	 */
 	function setup_site_options() {
 		$page = new Opts\page(
 			array(
 				'parent_id'  => 'options-general.php',
-				'id'         => '||PLUGIN_SLUG||-opts',
-				'page_title' => '||PLUGIN_NAME|| Settings' .
-				                ' <small style="font-size:0.66rem;"><code>||PLUGIN_SLUG||</code></small>',
-				'menu_title' => '||PLUGIN_NAME||',
+				'id'         => '<%= SLUG %>-opts',
+				'page_title' => '<%= NAME %> Settings' .
+				                ' <small style="font-size:0.66rem;"><code><%= SLUG %></code></small>',
+				'menu_title' => '<%= NAME %>',
 				'dashicon'   => 'dashicons-admin-settings',
 			)
 		);
+
 		$this->site_options = ( $page );
+
 		// setup sections
 		$this->site_options->add_part(
-			$general_section = new Opts\section(
+			$general_section = new Opts\Section(
 				'general', array(
 					'title'    => 'General',
 					'dashicon' => 'dashicons-admin-generic',
@@ -55,9 +67,9 @@ class Options_Panel {
 		/**
 		 * General Configuration Fields
 		 */
-		$slug = strtolower('||PLUGIN_SLUG||_');
+		$slug = '<%= SLUG %>_';
 		$general_section->add_part(
-			$text_field = new Opts\text(
+			$text_field = new Opts\Text(
 				$slug . 'text', array(
 					'label' => 'Text',
 				)
@@ -65,7 +77,7 @@ class Options_Panel {
 		);
 
 		$general_section->add_part(
-			$number = new Opts\number(
+			$number = new Opts\Number(
 				$slug . 'number', array(
 					'label' => 'Color',
 				)
@@ -73,7 +85,7 @@ class Options_Panel {
 		);
 
 		$general_section->add_part(
-			$color_field = new Opts\color_picker(
+			$color_field = new Opts\Color_Picker(
 				$slug . 'color', array(
 					'label' => 'Color',
 				)
@@ -81,7 +93,7 @@ class Options_Panel {
 		);
 
 		$general_section->add_part(
-			$toggle = new Opts\toggle_switch(
+			$toggle = new Opts\Toggle_Switch(
 				$slug . 'toggle', array(
 					'label' => 'Toggle',
 					'value' => 1,
@@ -90,20 +102,20 @@ class Options_Panel {
 		);
 
 		$general_section->add_part(
-			$select_field = new Opts\select(
+			$select_field = new Opts\Select(
 				$slug . 'select', array(
-					'label' => 'Select',
+					'label'  => 'Select',
 					'values' => array(
-						'uno' => 'Uno',
-						'dos' => 'Dos',
+						'uno'  => 'Uno',
+						'dos'  => 'Dos',
 						'tres' => 'Tres',
 					),
 				)
 			)
 		);
 
-
-
+		// initialize_panel() is a function in the opt panel Container class
 		$this->site_options->initialize_panel();
 	}
+
 }

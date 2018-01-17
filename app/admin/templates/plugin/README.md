@@ -1,34 +1,31 @@
-# ||PLUGIN_NAME||
+# <%= NAME %>
 
-##### ||PLUGIN_DESC||
+<%= DESC %>
+
+## INSTALL & CONFIGURE
+1. Upload the entire `/<%= SLUG %>` directory to the `/wp-content/plugins/` directory.
+2. Activate <%= name %> through the 'Plugins' menu in WordPress. In WordPress Multisite plugins can be activated 
+per-site or for the entire network.
+
+## FREQUENTLY ASKED QUESTIONS
+
+## HOW TO DEBUG
 
 ### DEVELOPER NOTES
+* Main plugin file: `<%= SLUG %>.php`.
+* Main plugin class: `<%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Plugin` in `/app/class-plugin.php`.
+	* Public functionality loaded in `Plugin::init()`
+	* Auth'd functionality checked with `is_user_logged_in()` and executed in `Plugin::authenticated_init()`
+* PHP in `/app`
+* JS & CSS in `/app/assets`
+* PHP deps in `/vendor` handled by Composer.
 
-TL;DR - Custom code in `/app`, PHP packages in `/vendor`, main file of importance is `/app/class-plugin.php` and plugin gets loaded by `main.php` in the current directory.
+Proper PSR-4 class names i.e. (Some_Class named class-some-class.php) in `/app`, `/app/admin`, and `/app/includes` 
+are autoloaded and don't require manual declaration.
 
 For more, see DEV-NOTES.md. Note production and development dependencies in package.json and composer.json.
 
-###### PLUGIN FOLDER HIEARCHY
+## CONTRIBUTORS
 
-* `/app`
-    * `/admin` (or code requiring authentication)
-        * `/css` production assets, include .min copy
-        * `/img` run through `imageoptim`
-        * `/js` production assets, include .min copy
-        * `/src` preprocessor files for css, js, Vue, etc.
-        * INCLUDE NEW PHP CLASSES HERE (i.e. `class-internal-api.php`, `class-admin-page.php`, `class-service-connector.php`, etc)
-        * INCLUDE NEW SUBFOLDERS HERE (i.e. `/templates`, `/fields`, `/providers` )
-    * `/includes`
-        * `/css`
-        * `/img`
-        * `/js`
-        * INCLUDE NEW PHP CLASSES HERE (i.e. `class-api.php`, `class-rewrite-rule.php`, `class-single-item.php`, etc)
-        * INCLUDE NEW SUBFOLDERS HERE (i.e. `/templates`, `/shortcodes`, `/taxonomies` )
-    * `class-plugin.php`
-* `/vendor`
-
-### CONTRIBUTORS
-
-This plugin is maintained by ||PLUGIN_AUTHORS||||PLUGIN_TEAM_DASH||.
-
+This plugin is maintained by <%= AUTHORS %><%= TEAM %>.
 ||PLUGIN_GITHUB_REPO||/graphs/contributors/

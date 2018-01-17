@@ -63,9 +63,14 @@ class Generators_Page {
 
 	function gather_submitted_data() {
 		$submitted = array();
-		$fields    = $this->reduce_to_single_attribute( $this->generator_app_data()['fields'], 'key' );
+		$fields    = array_column(  $this->generator_app_data()['fields'], 'key' );
+		$defaults  = array_column( $this->generator_app_data()['fields'], 'default', 'key' );
 		foreach ( $fields as $field ) {
-			if ( isset( $_POST[ $field ] ) ) {
+			if ( isset( $_POST[ $field ] ) && ! empty( $_POST[ $field ] ) ) {
+				$submitted[ $field ] = $_POST[ $field ];
+			} elseif ( ! empty( $defaults[ $field ] ) ) {
+				$submitted[ $field ] = $defaults[ $field ];
+			} else {
 				$submitted[ $field ] = $_POST[ $field ];
 			}
 		}
@@ -137,10 +142,61 @@ class Generators_Page {
 		$final	= array();
 		foreach ( $fields as $field ) {
 			$parsed = wp_parse_args( $field, $data['app']['field_defaults'] );
-			$final[] = $parsed;
+			$final[] = $this->inject_site_settings( $parsed );
 		}
 
 		return $final;
+	}
+
+	function inject_site_settings( $field ) {
+		switch( $field['key'] ) {
+			case 'plugin_authors':
+				if ( ! empty( get_option( 'wpop_pgen_author_custom' ) ) ) {
+					$field['default'] = get_option( 'wpop_pgen_author_custom' );
+					$field['placehold'] = 'Override ' . strval( get_option( 'wpop_pgen_author_custom' ) ) . '?';
+				}
+				break;
+			case 'plugin_arch_type':
+				if ( ! empty( get_option( 'wpop_pgen_plugin_arch_type' ) ) ) {
+					$field['default'] = get_option( 'wpop_pgen_plugin_arch_type' );
+				}
+				break;
+			case 'plugin_license':
+				if ( ! empty( get_option( 'wpop_pgen_license_type' ) ) ) {
+					$field['default'] = get_option( 'wpop_pgen_license_type' );
+				}
+				break;
+			case 'plugin_primary_namespace':
+				if ( ! empty( get_option( 'wpop_pgen_primary_namespace' ) ) ) {
+					$field['default'] = get_option( 'wpop_pgen_primary_namespace' );
+					$field['placehold'] = 'Override ' . strval( get_option( 'wpop_pgen_primary_namespace' ) ) . '?';
+				}
+				break;
+			case 'plugin_secondary_namespace':
+				if ( ! empty( get_option( 'wpop_pgen_secondary_namespace' ) ) ) {
+					$field['default'] = get_option( 'wpop_pgen_secondary_namespace' );
+					$field['placehold'] = 'Override ' . strval( get_option( 'wpop_pgen_secondary_namespace' ) ) . '"?';
+				}
+				break;
+			case 'plugin_teamorg':
+				if ( ! empty( get_option( 'wpop_pgen_teamorg_name' ) ) ) {
+					$field['default'] = get_option( 'wpop_pgen_teamorg_name' );
+					$field['placehold'] = 'Override ' . strval( get_option( 'wpop_pgen_teamorg_name' ) ) . '?';
+				}
+				break;
+			case 'plugin_opts_panel':
+				if ( ! empty( get_option( 'wpop_pgen_include_options_panel' ) ) ) {
+					$field['default'] = get_option( 'wpop_pgen_include_options_panel' );
+				}
+				break;
+			case 'plugin_register_enqueue_assets':
+				if ( ! empty( get_option( 'wpop_pgen_disable_assets' ) ) ) {
+					$field['default'] = get_option( 'wpop_pgen_disable_assets' );
+				}
+				break;
+		}
+
+		return $field;
 	}
 
 	/**
