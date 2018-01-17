@@ -43,11 +43,7 @@ class Plugin extends Abstract_Plugin {
 	 */
 	public function init() {
 		do_action( get_called_class() . '_before_init' );
-		new Includes\Init(
-			trailingslashit( $this->installed_dir ),
-			trailingslashit( $this->installed_url ),
-			$this->version
-		);
+		<%= INCLUDES_INIT %>
 		do_action( get_called_class() . '_after_init' );
 	}
 
@@ -57,11 +53,7 @@ class Plugin extends Abstract_Plugin {
 	public function authenticated_init() {
 		if ( is_user_logged_in() ) {
 			do_action( get_called_class() . '_before_authenticated_init' );
-			new Admin\Init(
-				trailingslashit( $this->installed_dir ),
-				trailingslashit( $this->installed_url ),
-				$this->version
-			);
+			<%= ADMIN_INIT %>
 			do_action( get_called_class() . '_after_authenticated_init' );
 		}
 	}

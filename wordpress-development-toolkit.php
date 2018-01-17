@@ -20,11 +20,6 @@ if ( ! class_exists( 'WPAZ_Plugin_Base\\V_2_5\\Abstract_Plugin' ) ) {
     include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/abstract-plugin-base/src/abstract-plugin.php';
 }
 
-// Load Options Panel
-if ( ! class_exists( 'WPOP\\V_2_10\\Page' ) ) {
-	include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/wordpress-options-builder-class/wordpress-phoenix-options-panel.php';
-}
-
 // make plugin class available for run below
 include_once 'app/class-toolkit.php';
 

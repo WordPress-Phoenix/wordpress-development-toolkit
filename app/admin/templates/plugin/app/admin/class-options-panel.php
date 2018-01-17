@@ -77,17 +77,27 @@ class Options_Panel {
 		);
 
 		$general_section->add_part(
-			$number = new Opts\Number(
-				$slug . 'number', array(
-					'label' => 'Color',
+			$textarea = new Opts\Textarea(
+				$slug . 'textarea', array(
+					'label' => 'Textarea',
 				)
 			)
 		);
 
 		$general_section->add_part(
-			$color_field = new Opts\Color_Picker(
-				$slug . 'color', array(
-					'label' => 'Color',
+			$number = new Opts\Number(
+				$slug . 'number', array(
+					'label' => 'Number',
+				)
+			)
+		);
+
+
+
+		$general_section->add_part(
+			$media = new Opts\Media(
+				$slug . 'media', array(
+					'label' => 'Media',
 				)
 			)
 		);
