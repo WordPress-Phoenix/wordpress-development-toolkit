@@ -29,7 +29,7 @@ class Toolkit extends Abstract_Plugin {
 		if ( is_user_logged_in() ) {
 			new Admin\Toolkit_Dashboard_Page( $this->installed_dir, $this->installed_url );
 			new Admin\Generators_Page( $this->installed_dir, $this->installed_url, $this->version );
-			new Admin\Plugin_Generator_Defaults( $this->installed_dir, $this->installed_url );
+//			new Admin\Plugin_Generator_Defaults( $this->installed_dir, $this->installed_url );
 //			new Admin\Documentation_Viewer( $this->installed_dir, $this->installed_url );
 		}
 		do_action( get_called_class() . '_after_authenticated_init' );
