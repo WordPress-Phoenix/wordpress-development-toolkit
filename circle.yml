@@ -1,0 +1,12 @@
+machine:
+  php:
+    version: 7.0.7
+
+dependencies:
+  pre:
+    - composer install --prefer-source --no-interaction
+    - ./vendor/bin/phpcs --config-set installed_paths $(readlink -f vendor/wp-coding-standards/wpcs/)
+
+test:
+  override:
+    - composer test

@@ -1017,16 +1017,24 @@ class Text extends Input {
 	public $input_type = 'text';
 }
 
-class Color_Picker extends Input {
-	public $input_type = 'text';
-}
-
 class Number extends Input {
 	public $input_type = 'number';
 }
 
 class Url extends Input {
 	public $input_type = 'url';
+}
+
+class Email extends Input {
+	public $input_type = 'email';
+}
+
+class Tel extends Input {
+	public $input_type = 'tel';
+}
+
+class Color_Picker extends Input {
+	public $input_type = 'text';
 }
 
 class Hidden extends Input {

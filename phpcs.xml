@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ruleset name="wp-enterprise-core">
+	<description>Code standard for Enterprise WordPress development</description>
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>tests/bootstrap.php</exclude-pattern>
+	<rule ref="WordPress-VIP"></rule>
+	<rule ref="WordPress-Core"></rule>
+	<rule ref="WordPress"></rule>
+</ruleset>

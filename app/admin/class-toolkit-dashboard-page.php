@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_PHX_Dev_Kit\V_1_0\Admin;
+namespace PHX_WP_DEVKIT\V_1_2\Admin;
 
 class Toolkit_Dashboard_Page {
 	/**
@@ -57,7 +57,7 @@ class Toolkit_Dashboard_Page {
 				}
 				.wrap { /* nudge the page */
 					margin: 10px 0 0 0 !important;
-				} /* now we have a modal-ready WP-Admin
+				} /* now we have a modal-ready WP-Admin */
 			<?php } ?>
 		</style>
 		<?php

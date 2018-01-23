@@ -1,7 +1,11 @@
 {
-    "require": {
-        "WordPress-Phoenix/abstract-plugin-base": "^2.5",
-        "WordPress-Phoenix/wordpress-options-builder-class": "^2.9",
-        "league/commonmark": "^0.16.0"
-    }
+  "require-dev": {
+	"wp-coding-standards/wpcs": "^0.10"
+  },
+  "scripts": {
+	"test": "composer lint",
+	"lint": "./vendor/bin/phpcs --standard=./phpcs.xml --extensions='php,js,css' ./",
+	"post-install-cmd": "./vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/",
+	"post-update-cmd": "./vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
+  }
 }

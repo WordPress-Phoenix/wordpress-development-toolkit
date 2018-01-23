@@ -1,9 +1,0 @@
-{
-  "Intro": "intro.md",
-  "Dependencies & Apps": "deps-apps.md",
-  "Terminal": "terminal.md",
-  "SSH": "ssh.md",
-  "Local DNS": "local-dns.md",
-  "Virtual Environments": "terminal.md",
-  "Other/Misc": "other.md"
-}
