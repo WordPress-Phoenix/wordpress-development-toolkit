@@ -186,7 +186,7 @@ class Product_Machine {
 				$panel_str = "
 				
 // Load Options Panel
-if ( ! class_exists( 'WPOP\\V_2_9\\\Page' ) ) {
+if ( ! class_exists( 'WPOP\\V_3_1\\\Page' ) ) {
 	include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/wordpress-options-builder-class/wordpress-phoenix-options-panel.php';
 }";
 			}

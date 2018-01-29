@@ -1,7 +1,9 @@
 <?php
 /**
+ *
  * <%= NAME %>
  *
+ * @wordpress-plugin
  * @package     <%= PKG %>
  * @author      <%= AUTHORS %><%= TEAM %>
  * @license     <%= LICENSE_TEXT %>
@@ -11,7 +13,6 @@
  * Built using WP PHX Plugin Generator v<%= GENERATOR_VERSION %> on <%= CURRENT_TIME %>
  * @link https://github.com/WordPress-Phoenix/wordpress-development-toolkit
  *
- * @wordpress-plugin
  * Plugin Name: <%= NAME %>
  * Plugin URI: <%= URL %>
  * Description: <%= DESC %>

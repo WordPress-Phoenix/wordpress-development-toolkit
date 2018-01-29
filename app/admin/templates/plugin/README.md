@@ -28,4 +28,4 @@ For more, see DEV-NOTES.md. Note production and development dependencies in pack
 ## CONTRIBUTORS
 
 This plugin is maintained by <%= AUTHORS %><%= TEAM %>.
-||PLUGIN_GITHUB_REPO||/graphs/contributors/
+<%= GITHUB_URL %>/graphs/contributors/
