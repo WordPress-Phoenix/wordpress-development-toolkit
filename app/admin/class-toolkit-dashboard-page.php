@@ -38,6 +38,9 @@ class Toolkit_Dashboard_Page {
 	 * Needed on every dashboard page for Admin Menu
 	 */
 	function global_admin_css() {
+		if ( wp_doing_ajax() ) {
+			return;
+		}
 		ob_start(); ?>
 		<style type="text/css">
 			#toplevel_page_wp-phx-dev-kit ul li:nth-of-type(2),
