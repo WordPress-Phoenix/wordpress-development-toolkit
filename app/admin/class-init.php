@@ -53,11 +53,6 @@ class Init {
 			$this->version 
 		);
 
-		// initialize site options panel
-		// new Options_Panel(
-		// 	$this->installed_dir,
-		// 	$this->installed_url
-		// );
 	}
 
 }

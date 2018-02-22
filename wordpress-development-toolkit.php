@@ -32,11 +32,6 @@ if ( ! function_exists( 'add_filter' ) ) { // prevent snooping file source, chec
 if ( ! class_exists( 'WPAZ_Plugin_Base\\V_2_5\\Abstract_Plugin' ) ) {
 	include_once trailingslashit( dirname( __FILE__ ) ) . 'vendor/wordpress-phoenix/abstract-plugin-base/src/abstract-plugin.php';
 }
-				
-// Load Options Panel
-if ( ! class_exists( 'WPOP\\V_2_9\\Page' ) ) {
-	include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/wordpress-options-builder-class/wordpress-phoenix-options-panel.php';
-}
 
 /**
  * Check PHX_WP_DEVKIT\V_1_2\Plugin Instantiated

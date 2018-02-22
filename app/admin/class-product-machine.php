@@ -53,7 +53,7 @@ class Product_Machine {
 		// check we have filesystem write access
 		if ( $creation_success ) {
 			// write json containing configuration data
-			$plugin_data = apply_filter( 'wp_phx_plugingen_datazip', array( 'data' => $data, 'config' => $config ) );
+			$plugin_data = apply_filters( 'wp_phx_plugingen_datazip', array( 'data' => $data, 'config' => $config ) );
 			$zip->addFromString( 'plugin-data.json', json_encode( $plugin_data ) );
 			// maybe include license
 			if ( 'gpl' === $data['plugin_license'] ) {
