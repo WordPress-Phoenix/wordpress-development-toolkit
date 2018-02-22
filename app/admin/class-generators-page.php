@@ -51,10 +51,12 @@ class Generators_Page {
 	 */
 	function process_download() {
 		$data = $this->gather_submitted_data();
+		error_log( var_export( $data, true ) );
+		$plugin = isset( $data['plugin_arch_type'] ) ? $data['plugin_arch_type'] : 'simple';
 		$data['generator_version'] = $this->version;
 		new Product_Machine(
 			sanitize_title_with_dashes( $data['plugin_name'] ),
-			$this->installed_dir . '/admin/templates/plugin',
+			$this->installed_dir . '/boilerplates/' . $plugin,
 			$this->installed_dir . '/tmp',
 			$data,
 			$this->create_config()
