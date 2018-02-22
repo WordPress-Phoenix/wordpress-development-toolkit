@@ -1,12 +1,15 @@
 <?php
 
-namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Includes;
+namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
+
+// protect file source
+defined( 'ABSPATH' ) or die();
 
 /**
- * Class Init
+ * Class App
  * @package <%= PKG %>
  */
-class Init {
+class App {
 
 	/**
 	 * @var string
@@ -24,7 +27,7 @@ class Init {
 	public $version;
 
 	/**
-	 * Add public and shared functionality via new Class() instantiation, add_action() and add_filter() in this method.
+	 * Add auth'd/admin functionality via new Class() instantiation, add_action() and add_filter() in this method.
 	 *
 	 * @param string $installed_dir
 	 * @param string $installed_url
@@ -35,13 +38,7 @@ class Init {
 		$this->installed_url = $installed_url;
 		$this->version       = $version;
 
-		// handle global assets
-		new Assets(
-			$this->installed_dir,
-			$this->installed_url,
-			$version
-		);
-		// Ex. add_action( 'init', array( $this, 'function_in_this_class' ) );
+		// put your new Class() or add_action() here.
 	}
 
 }

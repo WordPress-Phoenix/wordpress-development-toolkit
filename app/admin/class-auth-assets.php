@@ -50,8 +50,8 @@ class Auth_Assets {
 		/**
 		 * Register Assets
 		 */
-		add_action( 'init', array( $this, 'register_stylesheets' ) );
-		add_action( 'init', array( $this, 'register_scripts' ) );
+		add_action( 'App', array( $this, 'register_stylesheets' ) );
+		add_action( 'App', array( $this, 'register_scripts' ) );
 	}
 
 	/**

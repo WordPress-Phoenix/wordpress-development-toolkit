@@ -59,28 +59,7 @@ class Product_Machine {
 				if ( !! stristr( strval( $current_file ), 'ds_store' ) ) {
 					continue; // skip system files
 				}
-				if ( ( // no assets or simple build AND is .css, .js or class-assets.php, then skip
-					   ! isset( $data['plugin_register_enqueue_assets'] )
-				       || 'simple' === $data['plugin_arch_type']
-				     )
-				     && (
-					     !! stristr( strval( $current_file ), '.css' )
-				       || !! stristr( strval( $current_file ), '.js' )
-				       || !! stristr( strval( $current_file ), 'class-assets.php' )
-				     )
-				) {
-					continue;
-				}
-				// if simple AND isn't main.php, class-plugin.php or in wpphx dir, then skip
-				if ( 'simple' === $data['plugin_arch_type']
-				     && (
-				     	! stristr( strval( $current_file ), 'main.php' )
-					    && ! stristr( strval( $current_file ), 'class-plugin.php' )
-					    && ! stristr( strval( $current_file ), 'wordpress-phoenix' )
-				     )
-				) {
-					continue;
-				}
+
 				// VITAL FOR ALL FILES: give file relative path for zip
 				$current_file_stub = str_replace( trailingslashit( $origin_dir ), '', $current_file );
 				// Run WordPress Filter on File
@@ -96,24 +75,11 @@ class Product_Machine {
 			}
 
 			// only run these operations for standard plugins
-			if ( 'simple' !== $data['plugin_arch_type'] ) {
-				// add empties to key directories
-				$blank_file = '<?php ' . PHP_EOL . '// *gentle wave* not the code you\'re looking for..' . PHP_EOL;
-				$idx        = '/index.php';
-				$zip->addFromString( 'app' . $idx, $blank_file );
-				$zip->addFromString( 'vendor' . $idx, $blank_file );
-				$zip->addFromString( 'app/admin' . $idx, $blank_file );
-				$zip->addFromString( 'app/assets' . $idx, $blank_file );
-				$zip->addFromString( 'app/includes' . $idx, $blank_file );
-
-				// include options panel
-				if ( isset( $data['plugin_opts_panel'] ) && 'on' === $data['plugin_opts_panel'] ) {
-					$zip->addFromString(
-						'vendor/wordpress-phoenix/wordpress-options-builder-class/wordpress-phoenix-options-panel.php',
-						file_get_contents( dirname( __FILE__ ) . '/templates/wpop.php' )
-					);
-				}
-			}
+			// add empties to key directories
+			$blank_file = '<?php ' . PHP_EOL . '// *gentle wave* not the code you\'re looking for..' . PHP_EOL;
+			$idx        = '/index.php';
+			$zip->addFromString( 'app' . $idx, $blank_file );
+			$zip->addFromString( 'app/admin' . $idx, $blank_file );
 
 			// close zip
 			$zip->close();
@@ -159,7 +125,8 @@ class Product_Machine {
 		$contents       = str_ireplace( '<%= PRIMARY_NAMESPACE %>', $d['plugin_primary_namespace'], $contents );
 		$contents       = str_ireplace( '<%= SECONDARY_NAMESPACE %>', $d['plugin_secondary_namespace'], $contents );
 		$sanitized_name = sanitize_title_with_dashes( $d['plugin_name'] );
-		$contents       = str_ireplace( '<%= SLUG %>', $sanitized_name, $contents );
+		$contents       = str_ireplace( '<%= DASHES_SLUG %>', $sanitized_name, $contents );
+		$contents       = str_ireplace( '<%= US_SLUG %>', strtolower( str_ireplace( '-', '_', $sanitized_name ) ), $contents );
 		$contents       = str_ireplace( '<%= PKG %>', str_ireplace( '-', '_', ucwords( $sanitized_name ) ), $contents );
 
 		if ( 'main.php' === $filename || 'README.md' === $filename ) {
@@ -180,58 +147,6 @@ class Product_Machine {
 			$contents = str_ireplace( '<%= YEAR %>', current_time( "Y" ), $contents );
 			$contents = str_ireplace( '<%= CURRENT_TIME %>', current_time( 'l jS \of F Y h:i:s A' ), $contents );
 			$contents = str_ireplace( '<%= GENERATOR_VERSION %>', $d['generator_version'], $contents );
-
-			$panel_str = '';
-			if ( isset( $d['plugin_opts_panel'] ) && 'on' === $d['plugin_opts_panel'] ) {
-				$panel_str = "
-				
-// Load Options Panel
-if ( ! class_exists( 'WPOP\\V_3_1\\\Page' ) ) {
-	include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/wordpress-options-builder-class/wordpress-phoenix-options-panel.php';
-}";
-			}
-			$contents = str_ireplace( '<%= INSTANTIATE_OPTIONS_PANEL %>', $panel_str, $contents );
-		}
-
-		if ( stripos( $filename, 'class-plugin.php' ) ) {
-			if ( 'simple' === $d['plugin_arch_type'] ) {
-				$includes_init = '';
-				$admin_init    = '';
-
-			} else {
-				$includes_init = 'new Includes\Init(
-					trailingslashit( $this->installed_dir ),
-					trailingslashit( $this->installed_url ),
-					$this->version
-				);';
-				$admin_init    = 'new Admin\Init(
-					trailingslashit( $this->installed_dir ),
-					trailingslashit( $this->installed_url ),
-					$this->version
-				);';
-			}
-
-			$contents = str_ireplace( '<%= INCLUDES_INIT %>', $includes_init, $contents );
-			$contents = str_ireplace( '<%= ADMIN_INIT %>', $admin_init, $contents );
-		}
-
-		if ( ! isset( $d['plugin_register_enqueue_assets'] ) && stripos( $filename, 'class-init.php' ) ) {
-			$initStr = '
-		// handle global assets
-		new Assets(
-			$this->installed_dir,
-			$this->installed_url,
-			$version
-		);';
-			$contents = str_ireplace( $initStr, '', $contents );
-			$authInit = '
-		// handle authenticated stylesheets and scripts
-		new Auth_Assets(
-			$this->installed_dir,
-			$this->installed_url,
-			$this->version
-		);';
-			$contents = str_ireplace( $authInit, '', $contents );
 		}
 
 		return $contents;
@@ -256,10 +171,6 @@ if ( ! class_exists( 'WPOP\\V_3_1\\\Page' ) ) {
 	static function process_filename( $file ) {
 		if ( 'main.php' === $file['filename'] ) {
 			return $file['data']['mainFilename'] . '.php';
-		}
-
-		if ( stripos( $file['filename'], '.css' ) || stripos( $file['filename'], '.js' ) ) {
-			return str_ireplace( 'plugin-', $file['data']['mainFilename'] . '-', $file['filename'] );
 		}
 
 		return $file['filename'];

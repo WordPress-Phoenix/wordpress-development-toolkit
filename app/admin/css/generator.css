@@ -42,18 +42,18 @@ td.primary {
 }
 
 
-#plugin_opts_panel_type-wrap,
-#plugin_autoload-wrap,
-#plugin_ver-wrap,
-#plugin_teamorg-wrap,
-#plugin_repo_url-wrap,
-#plugin_opts_panel-wrap,
-#plugin_rest_api-wrap,
-#plugin_admin_pages-wrap,
-#plugin_admin_blank-wrap,
-#plugin_register_enqueue_assets-wrap {
-	display: none;
-}
+/*#plugin_opts_panel_type-wrap,*/
+/*#plugin_autoload-wrap,*/
+/*#plugin_ver-wrap,*/
+/*#plugin_teamorg-wrap,*/
+/*#plugin_repo_url-wrap,*/
+/*#plugin_opts_panel-wrap,*/
+/*#plugin_rest_api-wrap,*/
+/*#plugin_admin_pages-wrap,*/
+/*#plugin_admin_blank-wrap,*/
+/*#plugin_register_enqueue_assets-wrap {*/
+	/*display: none;*/
+/*}*/
 
 
 .onoffswitch-wrap {

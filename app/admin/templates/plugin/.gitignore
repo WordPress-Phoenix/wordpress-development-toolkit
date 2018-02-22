@@ -1,0 +1,31 @@
+# dirs
+/bin/
+
+# circle ci
+/lib/*/.circleci
+
+# composer
+composer.phar
+/vendor/
+/lib/autoload.php
+!/lib/composer/
+!/lib/composer/installed.json
+/lib/composer/*
+
+# windows junk
+Thumbs.db
+ehthumbs.db
+
+# apple junk
+.DS_STORE
+.ds_store
+
+# folder config file
+Desktop.ini
+
+# sublime
+*.sublime-project
+*.sublime-workspace
+
+# phpstorm
+.idea/

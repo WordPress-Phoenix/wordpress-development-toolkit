@@ -1,11 +1,24 @@
 {
-  "require-dev": {
-	"wp-coding-standards/wpcs": "^0.10"
+  "name": "usethelinter/<% SLUG %>",
+  "description": "<% DESCRIPTION %>",
+  "keywords": ["wordpress","site-options","utility","helper"],
+  "homepage": "https://github.com/usethelinter/<% SLUG %>",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+	{
+	  "name": "Code Devwalker",
+	  "email": "code.devwalker@gmail.com",
+	  "homepage": "https://github.com/usethelinter",
+	  "role": "Developer"
+	}
+  ],
+  "require": {
+	"WordPress-Phoenix/abstract-plugin-base": "^2.5"
   },
-  "scripts": {
-	"test": "composer lint",
-	"lint": "./vendor/bin/phpcs --standard=./phpcs.xml --extensions='php,js,css' ./",
-	"post-install-cmd": "./vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/",
-	"post-update-cmd": "./vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
+  "config": {
+	"vendor-dir": "lib"
+  },
+  "autoload": {
+	"classmap": ["/"]
   }
 }

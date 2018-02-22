@@ -3,8 +3,9 @@
 namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>;
 
 use <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
-use <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Includes;
-use WPAZ_Plugin_Base\V_2_5\Abstract_Plugin;
+use WPAZ_Plugin_Base\V_2_6\Abstract_Plugin;
+
+defined( 'ABSPATH' ) or die(); // protect file source
 
 /**
  * Class Plugin
@@ -30,7 +31,13 @@ class Plugin extends Abstract_Plugin {
 	/**
 	 * @var string
 	 */
+	public static $action_prefix = '<%= US_SLUG %>_';
+
+	/**
+	 * @var string
+	 */
 	protected static $current_file = __FILE__;
+
 
 	/**
 	 * @param mixed $instance
@@ -39,22 +46,23 @@ class Plugin extends Abstract_Plugin {
 	}
 
 	/**
-	 * Initialize public / shared functionality
+	 * Initialize public / shared functionality using new Class(), add_action() or add_filter().
 	 */
 	public function init() {
-		do_action( get_called_class() . '_before_init' );
-		<%= INCLUDES_INIT %>
-		do_action( get_called_class() . '_after_init' );
+		do_action( static::$action_prefix . 'before_init' );
+
+		do_action( static::$action_prefix . 'after_init' );
 	}
 
 	/**
-	 * Initialize functionality only loaded for logged-in users
+	 * Initialize functionality only loaded for logged-in users.
 	 */
 	public function authenticated_init() {
 		if ( is_user_logged_in() ) {
-			do_action( get_called_class() . '_before_authenticated_init' );
-			<%= ADMIN_INIT %>
-			do_action( get_called_class() . '_after_authenticated_init' );
+			do_action( static::$action_prefix . 'before_authenticated_init' );
+			// $this->admin is in the abstract plugin base class
+			$this->admin = new Admin\App();
+			do_action( static::$action_prefix . 'after_authenticated_init' );
 		}
 	}
 

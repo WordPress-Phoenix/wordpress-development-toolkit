@@ -177,10 +177,10 @@ abstract class Abstract_Plugin {
 		$this->onload( $this );
 
 		// Most actions go into init which loads after WordPress core sets up all the defaults.
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'App', array( $this, 'App' ) );
 
 		// Init for use with logged in users, see this::authenticated_init for more details.
-		add_action( 'init', array( $this, 'authenticated_init' ) );
+		add_action( 'App', array( $this, 'authenticated_init' ) );
 
 		// Hook can be used by mu plugins to modify plugin behavior after plugin is setup.
 		do_action( get_called_class() . '_setup', $this );
@@ -430,7 +430,7 @@ abstract class Abstract_Plugin {
 	public static function run( $file ) {
 		// Logic required for WordPress VIP plugins to load during themes function file initialization.
 		if ( did_action( 'plugins_loaded' ) ) {
-			add_action( 'init', array( get_called_class(), 'load' ), 1 );
+			add_action( 'App', array( get_called_class(), 'load' ), 1 );
 		} else {
 			add_action( 'plugins_loaded', array( get_called_class(), 'load' ) );
 			// Installation and un-installation hooks.

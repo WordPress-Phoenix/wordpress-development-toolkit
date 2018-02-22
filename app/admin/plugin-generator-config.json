@@ -56,12 +56,11 @@
 	  "key": "plugin_arch_type",
 	  "label": "Plugin Type",
 	  "choices": {
-		"simple": "Simple",
-		"standard": "Standard"
+		"simple": "Simple"
 	  },
 	  "desc": "",
-	  "default": "standard",
-	  "placehold": "standard"
+	  "default": "simple",
+	  "placehold": "simple"
 	},
 	{
 	  "type": "radios",
@@ -92,28 +91,6 @@
 	},
 	{
 	  "type": "input",
-	  "inputType": "checkbox",
-	  "key": "builder_show_adv",
-	  "label": "Show Advanced Options",
-	  "desc": "Modify periphery defaults and include additional code",
-	  "default": "false",
-	  "placehold": ""
-	},
-
-	{
-	  "type": "radios",
-	  "key": "plugin_autoload",
-	  "label": "Dependency Loader",
-	  "choices": {
-		"manual": "Manual"
-	  },
-	  "desc": "Loader for 3rd party dependency packages <small>(doesn't affect default PSR-4 plugin file autoloading)</small>",
-	  "default": "manual",
-	  "placehold": "manual"
-	},
-
-	{
-	  "type": "input",
 	  "inputType": "text",
 	  "key": "plugin_ver",
 	  "label": "Version",
@@ -136,22 +113,6 @@
 	  "desc": "What is your github plugin URL?",
 	  "default": "http://github.com/wordpress-phoenix",
 	  "placehold": "https://github.com/wordpress-phoenix/your-plugin-repo"
-	},
-	{
-	  "type": "input",
-	  "inputType": "checkbox",
-	  "key": "plugin_opts_panel",
-	  "label": "Include Options Panel",
-	  "desc": "Include and initialize an options panel to configure.",
-	  "default": "false"
-	},
-	{
-	  "type": "input",
-	  "inputType": "checkbox",
-	  "key": "plugin_register_enqueue_assets",
-	  "label": "Register and Enqueue Assets",
-	  "desc": "Provide CSS and JavaScript files for public and authenticated use.",
-	  "default": "true"
 	}
   ]
 }

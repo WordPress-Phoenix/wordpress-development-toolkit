@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ruleset name="timeinc-wp-plugin">
+    <description>Custom plugin codesniffer exceptions.</description>
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>lib/composer/*</exclude-pattern>
+    <exclude-pattern>assets/*</exclude-pattern>
+    <rule ref="WordPress-VIP"></rule>
+</ruleset>

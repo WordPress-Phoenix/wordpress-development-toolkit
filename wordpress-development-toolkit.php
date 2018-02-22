@@ -15,7 +15,7 @@
  * Plugin Name: WordPress Development Toolkit
  * Plugin URI: https://github.com/wordpress-phoenix
  * Description: Tools and resources for WordPress development.
- * Version: 0.1.2
+ * Version: 0.1.3
  * Author: David Ryan  - WordPress Phoenix
  * Text Domain: wordpress-development-toolkit
  * License: GNU GPL v2.0+
@@ -34,7 +34,7 @@ if ( ! class_exists( 'WPAZ_Plugin_Base\\V_2_5\\Abstract_Plugin' ) ) {
 }
 				
 // Load Options Panel
-if ( ! class_exists( 'WPOP\V_2_9\\Page' ) ) {
+if ( ! class_exists( 'WPOP\\V_2_9\\Page' ) ) {
 	include_once  trailingslashit( dirname( __FILE__ ) )  . 'vendor/wordpress-phoenix/wordpress-options-builder-class/wordpress-phoenix-options-panel.php';
 }
 
