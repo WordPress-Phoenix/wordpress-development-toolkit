@@ -22,13 +22,18 @@ class Product_Machine {
 	 * @param array $config
 	 */
 	public function __construct( $filename, $origin_dir, $tmp_dir, $data, $config ) {
-		add_filter( 'wp_phx_plugingen_file_contents', array( $this, 'process_file_contents_via_filter' ) );
+		/**
+		 * Each file gets passed through this filter for processing
+		 */
+		add_filter(
+			'wp_phx_plugingen_file_contents',
+			array( $this, 'process_file_contents_via_filter' )
+		);
 		self::make_zip_download( $filename, $origin_dir, $tmp_dir, $data, $config );
 	}
 
 	/**
 	 * Create a .ZIP download for the plugin generator
-	 * @todo: abstract to use for multiple generators
 	 *
 	 * @param $filename
 	 * @param $origin_dir
@@ -48,7 +53,8 @@ class Product_Machine {
 		// check we have filesystem write access
 		if ( $creation_success ) {
 			// write json containing configuration data
-			$zip->addFromString( 'plugin-data.json', json_encode( array( 'data' => $data, 'config' => $config ) ) );
+			$plugin_data = apply_filter( 'wp_phx_plugingen_datazip', array( 'data' => $data, 'config' => $config ) );
+			$zip->addFromString( 'plugin-data.json', json_encode( $plugin_data ) );
 			// maybe include license
 			if ( 'gpl' === $data['plugin_license'] ) {
 				$zip->addFromString( 'LICENSE', file_get_contents( dirname( __FILE__ ) . '/templates/gpl.txt' ) );
@@ -129,7 +135,12 @@ class Product_Machine {
 		$contents       = str_ireplace( '<%= US_SLUG %>', strtolower( str_ireplace( '-', '_', $sanitized_name ) ), $contents );
 		$contents       = str_ireplace( '<%= PKG %>', str_ireplace( '-', '_', ucwords( $sanitized_name ) ), $contents );
 
-		if ( 'main.php' === $filename || 'README.md' === $filename ) {
+		$important_files = apply_filters( 'wp_phx_plugingen_file_contents', array(
+			'main.php',
+			'README.md',
+		) );
+
+		if ( in_array( $filename, $important_files ) ) {
 			$contents = str_ireplace( '<%= AUTHORS %>', $d['plugin_authors'], $contents );
 			$contents = str_ireplace( '<%= TEAM %>', ! empty( $d['plugin_teamorg'] ) ? ' - ' . $d['plugin_teamorg'] : '', $contents );
 			$contents = str_ireplace( '<%= LICENSE_TEXT %>', self::version_text( $d ), $contents );
