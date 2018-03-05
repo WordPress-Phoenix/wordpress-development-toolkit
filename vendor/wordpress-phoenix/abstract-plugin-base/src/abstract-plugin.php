@@ -4,7 +4,7 @@
  *
  * @author  Seth Carstens
  * @package abtract-plugin-base
- * @version 2.5.1
+ * @version 2.5.3
  * @license GPL 2.0 - please retain comments that express original build of this file by the author.
  */
 
@@ -177,10 +177,10 @@ abstract class Abstract_Plugin {
 		$this->onload( $this );
 
 		// Most actions go into init which loads after WordPress core sets up all the defaults.
-		add_action( 'App', array( $this, 'App' ) );
+		add_action( 'init', array( $this, 'init' ) );
 
 		// Init for use with logged in users, see this::authenticated_init for more details.
-		add_action( 'App', array( $this, 'authenticated_init' ) );
+		add_action( 'init', array( $this, 'authenticated_init' ) );
 
 		// Hook can be used by mu plugins to modify plugin behavior after plugin is setup.
 		do_action( get_called_class() . '_setup', $this );
@@ -236,13 +236,13 @@ abstract class Abstract_Plugin {
 	 * Setup plugins global params.
 	 */
 	protected function configure_defaults() {
-		$this->modules           = new \stdClass();
-		$this->modules->count    = 0;
-		$this->installed_dir     = static::dirname( static::$current_file, 1 );
-		$this->plugin_basedir    = static::dirname( static::$current_file, 2 );
-		$assumed_plugin_name     = basename( $this->plugin_basedir );
-		$this->plugin_file       = $this->plugin_basedir . '/' . $assumed_plugin_name . '.php';
-		$this->wp_plugin_slug    = $assumed_plugin_name . '/' . $assumed_plugin_name . '.php';
+		$this->modules        = new \stdClass();
+		$this->modules->count = 0;
+		$this->installed_dir  = static::dirname( static::$current_file, 1 );
+		$this->plugin_basedir = static::dirname( static::$current_file, 2 );
+		$assumed_plugin_name  = basename( $this->plugin_basedir );
+		$this->plugin_file    = $this->plugin_basedir . '/' . $assumed_plugin_name . '.php';
+		$this->wp_plugin_slug = $assumed_plugin_name . '/' . $assumed_plugin_name . '.php';
 
 		if ( is_callable( 'is_plugin_active_for_network' ) ) {
 			$this->is_network_active = is_plugin_active_for_network( $this->wp_plugin_slug );
@@ -291,11 +291,11 @@ abstract class Abstract_Plugin {
 	 *
 	 * @return string
 	 */
-	public static function dirname($path, $count=1){
-		if ($count > 1){
-			return dirname(static::dirname($path, --$count));
-		}else{
-			return dirname($path);
+	public static function dirname( $path, $count = 1 ) {
+		if ( $count > 1 ) {
+			return dirname( static::dirname( $path, -- $count ) );
+		} else {
+			return dirname( $path );
 		}
 	}
 
@@ -430,7 +430,7 @@ abstract class Abstract_Plugin {
 	public static function run( $file ) {
 		// Logic required for WordPress VIP plugins to load during themes function file initialization.
 		if ( did_action( 'plugins_loaded' ) ) {
-			add_action( 'App', array( get_called_class(), 'load' ), 1 );
+			add_action( 'init', array( get_called_class(), 'load' ), 1 );
 		} else {
 			add_action( 'plugins_loaded', array( get_called_class(), 'load' ) );
 			// Installation and un-installation hooks.
