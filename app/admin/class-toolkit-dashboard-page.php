@@ -43,8 +43,7 @@ class Toolkit_Dashboard_Page {
 		}
 		ob_start(); ?>
 		<style type="text/css">
-			#toplevel_page_wp-phx-dev-kit ul li:nth-of-type(2),
-			#toplevel_page_wp-phx-dev-kit ul li:nth-of-type(3) {
+			#toplevel_page_wp-phx-dev-kit .wp-submenu {
 				display: none;
 			}
 			<?php if ( isset( $_GET['modal_view'] ) ) { ?>
