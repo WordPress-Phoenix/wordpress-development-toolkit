@@ -1,6 +1,6 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_2_1\Admin;
+namespace PHX_WP_DEVKIT\V_2_5\Admin;
 
 /**
  * Class Init
