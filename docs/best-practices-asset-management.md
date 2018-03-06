@@ -1,4 +1,4 @@
-# WordPress Frontend Dependency Best Practices
+# WordPress Asset Management Best Practices
 
 #### Break `wp_register_script()` and `wp_register_style()` arguments onto their own lines
 
