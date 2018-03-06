@@ -56,17 +56,4 @@ When integrating someone else's solution, please consider the following:
 changing Thumbnail Sizes
 * [P3 Plugin Profiler](https://wordpress.org/plugins/p3-profiler/) - Tool to better understand plugin performance
 * [Locomotive](https://github.com/reaktivstudios/locomotive) - Simple, repeatable batch process tasks for wordpress
-
-# Helpful Open-Source Resources for Enterprise-Ready WordPress Code
-(not all code available in these organizations is "enterprise ready for everyone", however, there are many good examples for many kinds of enterprises)
-* https://github.com/10up
-* https://github.com/crowdfavorite
-* https://github.com/xwp
-* https://github.com/humanmade
-* https://github.com/automattic
-	* https://github.com/Automattic/vip-go-mu-plugins-built
-* https://github.com/easydigitaldownloads/easy-digital-downloads
-* https://github.com/stuttter
-* https://github.com/washingtonstateuniversity
-* https://github.com/webdevstudios
-* https://github.com/dfmedia
+* [Query Monitor](https://wordpress.org/plugins/query-monitor/) - Debug WordPress deeply in any environment. Detect every running action, filter, registered script, environment configuration, simple PHP errors and evaluate long-running database queries.
