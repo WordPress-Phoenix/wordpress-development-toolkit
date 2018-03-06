@@ -39,7 +39,7 @@ class Auth_Assets {
 	function __construct( $dir, $url, $version ) {
 		$this->installed_dir = $dir;
 		$this->installed_url = $url;
-		$this->asset_url     = $this->installed_url . 'app/assets/';
+		$this->asset_url     = $this->installed_url . 'assets/';
 		$this->version       = $version;
 
 		/**
