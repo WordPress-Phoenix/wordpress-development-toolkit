@@ -22,7 +22,7 @@ When registering CSS or JS within a PHP class, always store the asset handle as 
 
 #### Leverage dependency chaining and the `array()` method for `wp_enqueue_*()`
 
-A common place that can feel repetitive is registering and initializing enqueued assets. Make sure you make good, appropriate forcing order and perhaps enqueue of dependencies via `wp_register_*`'s `$dependency` parameter.
+A common place that can feel repetitive is registering and initializing enqueued assets. Perhaps trigger enqueue of dependencies via `wp_register_*`'s `$dependency` parameter.
 
 Also, if enqueueing multiple scripts or styles simultaneously, use a single `wp_enqueue_script()` or `wp_enqueue_style()` with an array of dependency slugs to avoid repetition.
 
