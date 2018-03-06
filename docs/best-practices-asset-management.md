@@ -1,4 +1,4 @@
-# WordPress Frontend Dependency Best Practices
+# WordPress Asset Management Best Practices
 
 #### Break `wp_register_script()` and `wp_register_style()` arguments onto their own lines
 
@@ -22,7 +22,7 @@ When registering CSS or JS within a PHP class, always store the asset handle as 
 
 #### Leverage dependency chaining and the `array()` method for `wp_enqueue_*()`
 
-A common place that can feel repetitive is registering and initializing enqueued assets. Make sure you make good, appropriate forcing order and perhaps enqueue of dependencies via `wp_register_*`'s `$dependency` parameter.
+A common place that can feel repetitive is registering and initializing enqueued assets. Perhaps trigger enqueue of dependencies via `wp_register_*`'s `$dependency` parameter.
 
 Also, if enqueueing multiple scripts or styles simultaneously, use a single `wp_enqueue_script()` or `wp_enqueue_style()` with an array of dependency slugs to avoid repetition.
 
@@ -51,5 +51,5 @@ WordPress does little to prevent the collision of scripts. Short of defining dep
 
 Plus at time of writing it's 2017 and React and Vue-based apps, use of JavaScript tools is becoming more prevalent. Some of these authors create a rollup file of dependencies and a rollup of their app. Even in an environment you control, you likely rely on some 3rd party plugins that load dependencies.
 
-### Provide a version string for caching
-We recommend tying product assets the version for the Theme or Plugin you're in. Having a condition that checks for local environments (i.e. check request string for ".test") and toggling between a production version and a rand(0,PHP_INT_MAX) is another good option.
+#### Provide a version string for caching
+We recommend tying product assets the version for the Theme or Plugin you're in. Having a condition that checks for local environments (i.e. check request string for ".test") and toggling between a production version and a `rand(0,PHP_INT_MAX)` is another good option.
