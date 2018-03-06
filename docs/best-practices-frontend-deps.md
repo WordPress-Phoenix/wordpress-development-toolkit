@@ -51,5 +51,5 @@ WordPress does little to prevent the collision of scripts. Short of defining dep
 
 Plus at time of writing it's 2017 and React and Vue-based apps, use of JavaScript tools is becoming more prevalent. Some of these authors create a rollup file of dependencies and a rollup of their app. Even in an environment you control, you likely rely on some 3rd party plugins that load dependencies.
 
-### Provide a version string for caching
+#### Provide a version string for caching
 We recommend tying product assets the version for the Theme or Plugin you're in. Having a condition that checks for local environments (i.e. check request string for ".test") and toggling between a production version and a rand(0,PHP_INT_MAX) is another good option.
