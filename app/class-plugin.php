@@ -1,9 +1,8 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_2_1;
+namespace PHX_WP_DEVKIT\V_2_5;
 
-use PHX_WP_DEVKIT\V_2_1\Admin;
-use PHX_WP_DEVKIT\V_2_1\Includes;
+use PHX_WP_DEVKIT\V_2_5\Admin;
 use WPAZ_Plugin_Base\V_2_6\Abstract_Plugin as Base;
 
 /**
