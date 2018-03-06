@@ -3,7 +3,7 @@
 namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>;
 
 use <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
-use WPAZ_Plugin_Base\V_2_6\Abstract_Plugin;
+use <%= ABSTRACT_PLUGIN_NAMESPACE %>\Abstract_Plugin;
 
 if ( ! function_exists( 'add_filter' ) ) {
 	header( 'Status: 403 Forbidden' );
@@ -65,7 +65,11 @@ class Plugin extends Abstract_Plugin {
 		if ( is_user_logged_in() ) {
 			do_action( static::$action_prefix . 'before_authenticated_init' );
 			// $this->admin is in the abstract plugin base class
-			$this->admin = new Admin\App();
+			$this->admin = new Admin\App(
+				$this->installed_dir,
+				$this->installed_url,
+				$this->version
+			);
 			do_action( static::$action_prefix . 'after_authenticated_init' );
 		}
 	}

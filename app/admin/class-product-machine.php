@@ -49,6 +49,8 @@ class Product_Machine {
 			ZipArchive::CREATE && ZipArchive::OVERWRITE
 		);
 
+
+
 		// check we have filesystem write access
 		if ( $creation_success ) {
 			// write json containing configuration data
@@ -58,6 +60,39 @@ class Product_Machine {
 			// maybe include license
 			if ( 'gpl' === $data['plugin_license'] ) {
 				$zip->addFromString( 'LICENSE', file_get_contents( dirname( __FILE__ ) . '/../boilerplates/GPL.txt' ) );
+			}
+			$abstract_plugin_file_dest = '/lib/wordpress-phoenix/abstract-plugin-base/src/abstract-plugin.php';
+			if ( defined( 'WP_DEV_KIT_AIRPLANE_MODE' ) && WP_DEV_KIT_AIRPLANE_MODE ) {
+				$plugin_base = file_get_contents( $tmp_dir . '/../lib/wordpress-phoenix/abstract-plugin-base/src/abstract-plugin.php' );
+				$abstract_plugin_namespace = self::get_abstract_plugin_base_namespace( $plugin_base );
+				$data['abstractPluginNamespace'] = $abstract_plugin_namespace;
+				$zip->addFromString(
+					$abstract_plugin_file_dest,
+					$plugin_base
+				);
+			} else {
+				$github_api_call = wp_remote_get(
+					'https://api.github.com/repos/WordPress-Phoenix/abstract-plugin-base/contents/src/abstract-plugin.php?ref=master',
+					[
+						'timeout' => 10,
+					]
+				);
+				$github_response = wp_remote_retrieve_body( $github_api_call );
+				$github_response = json_decode( $github_response, true );
+				if ( isset( $github_response['content'] ) ) {
+					$content = base64_decode( $github_response['content'] );
+					$namespace = self::get_abstract_plugin_base_namespace( $content );
+					$data['abstractPluginNamespace'] = $namespace;
+					$zip->addFromString( $abstract_plugin_file_dest, $content );
+				} else {
+					$plugin_base = file_get_contents( $tmp_dir . '/../lib/wordpress-phoenix/abstract-plugin-base/src/abstract-plugin.php' );
+					$abstract_plugin_namespace = self::get_abstract_plugin_base_namespace( $plugin_base );
+					$data['abstractPluginNamespace'] = $abstract_plugin_namespace;
+					$zip->addFromString(
+						$abstract_plugin_file_dest,
+						$plugin_base
+					);
+				}
 			}
 			// find every file within origin directory including nested files
 			$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $origin_dir ) );
@@ -81,6 +116,8 @@ class Product_Machine {
 					$zip->addFromString( $processed_file['filename'], $processed_file['contents'] );
 				}
 			}
+
+
 
 			// only run these operations for standard plugins
 			// add empties to key directories
@@ -152,9 +189,12 @@ class Product_Machine {
 			'main.php',
 			'README.md',
 			'composer.json',
+			'app/class-plugin.php'
 		) );
 
 		if ( in_array( $filename, $important_files ) ) {
+			$contents = str_ireplace( '<%= ABSTRACT_PLUGIN_NAMESPACE %>', $d['abstractPluginNamespace'], $contents );
+			$contents = str_ireplace( '<%= ABSTRACT_PLUGIN_NAMESPACE_CHECK %>', addslashes($d['abstractPluginNamespace'] ), $contents );
 			$contents = str_ireplace( '<%= AUTHORS %>', $d['plugin_authors'], $contents );
 			$contents = str_ireplace( '<%= TEAM_NAME %>', ! empty( $d['plugin_teamorg'] ) ? $d['plugin_teamorg'] : '', $contents );
 			$contents = str_ireplace( '<%= TEAM %>', ! empty( $d['plugin_teamorg'] ) ? ' - ' . $d['plugin_teamorg'] : '', $contents );
@@ -217,5 +257,14 @@ class Product_Machine {
 		}
 
 		return $file['filename'];
+	}
+
+	static function get_abstract_plugin_base_namespace( $file_contents ) {
+		$m = array();
+		if ( preg_match('#^namespace\s+(.+?);$#sm', $file_contents, $m ) ) {
+			return $m[1];
+		}
+
+		return null;
 	}
 }

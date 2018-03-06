@@ -33,7 +33,7 @@ $current_dir = trailingslashit( dirname( __FILE__ ) );
  * 3RD PARTY DEPENDENCIES
  * (manually include_once dependencies installed via composer for safety)
  */
-if ( ! class_exists( 'WPAZ_Plugin_Base\\V_2_6\\Abstract_Plugin' ) ) {
+if ( ! class_exists( '<%= ABSTRACT_PLUGIN_NAMESPACE_CHECK %>\\Abstract_Plugin' ) ) {
 	include_once $current_dir . 'lib/wordpress-phoenix/abstract-plugin-base/src/abstract-plugin.php';
 }
 
