@@ -1,6 +1,6 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_2_5\Admin;
+namespace PHX_WP_DEVKIT\V_3_0\Admin;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
