@@ -43,11 +43,7 @@ class Plugin extends Base {
 	 */
 	public function init() {
 		do_action( get_called_class() . '_before_init' );
-		new Includes\Init(
-					trailingslashit( $this->installed_dir ),
-					trailingslashit( $this->installed_url ),
-					$this->version
-				);
+		// silence is golden :)
 		do_action( get_called_class() . '_after_init' );
 	}
 

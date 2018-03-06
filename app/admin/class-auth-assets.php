@@ -58,7 +58,10 @@ class Auth_Assets {
 	 * Enqueue Assets for Authenticated Users
 	 * @package Wordpress_development_toolkit
 	 */
-	function enqueue_auth_assets() {
+	function enqueue_auth_assets( $hook ) {
+		if ( false === strpos( $hook, 'wp-phx-dev-kit' ) ) {
+			return;
+		}
 		wp_enqueue_style( 'wordpress-development-toolkit-admin' );
 		wp_enqueue_script( 'wordpress-development-toolkit-admin' );
 	}

@@ -57,7 +57,7 @@ class Product_Machine {
 			$zip->addFromString( 'plugin-data.json', json_encode( $plugin_data ) );
 			// maybe include license
 			if ( 'gpl' === $data['plugin_license'] ) {
-				$zip->addFromString( 'LICENSE', file_get_contents( dirname( __FILE__ ) . '/templates/gpl.txt' ) );
+				$zip->addFromString( 'LICENSE', file_get_contents( dirname( __FILE__ ) . '../boilerplates/GPL.txt' ) );
 			}
 			// find every file within origin directory including nested files
 			$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $origin_dir ) );

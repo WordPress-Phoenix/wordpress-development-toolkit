@@ -3,21 +3,21 @@
 	{
 	  "title": "Tools",
 	  "slug": "tools",
-	  "description": "",
+	  "description": "Create a new WordPress Plugin using the <a href='https://github.com/wordpress-phoenix/abstract-plugin-base/' target='_blank'>Abstract Plugin Base</a>.",
 	  "dashicon": "vault",
 	  "contentTmpl": "wp-phx-tools"
 	},
 	{
 	  "title": "Enterprise Standards & Best Practices",
 	  "slug": "wp-phx-standards-best-practices",
-	  "description": "Coming soon",
+	  "description": "",
 	  "dashicon": "wordpress-alt",
-	  "contentTmpl": ""
+	  "contentTmpl": "wp-phx-standards-best-practices"
 	},
 	{
 	  "title": "Guides & Glossaries",
 	  "slug": "guides-glossaries",
-	  "description": "Coming Soon: Hwelpful resources for WordPress Development",
+	  "description": "",
 	  "dashicon": "book-alt",
 	  "contentTmpl": "wp-phx-guides-glossaries"
 	}

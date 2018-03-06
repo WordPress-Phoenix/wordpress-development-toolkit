@@ -10,37 +10,51 @@
 	</table>
 </script>
 <script id="tmpl-wp-phx-standards-best-practices" type="text/html">
+	<small><strong>These guides are fresh and incomplete</strong> and not the best they can be yet! Help contribute!</small>
 	<table width="100%">
 		<tr>
 			<td width="100px">
-				<span class="dashicons dashicons-info"></span>
-				<strong>Intro</strong></td>
-			<td>Tools, Environments, Goals</td>
+				<span class="dashicons dashicons-media-code"></span>
+				<a href="https://github.com/WordPress-Phoenix/wordpress-development-toolkit/blob/master/docs/best
+				-practices-asset-management.md" target="_blank">Asset Management</a>
+			</td>
 		</tr>
 		<tr>
 			<td width="100px">
-				<span class="dashicons dashicons-media-code"></span> Code</td>
-			<td>Best Practices, PHP, JS, Dependencies</td>
+				<span class="dashicons dashicons-networking"></span>
+				<a href="https://github.com/WordPress-Phoenix/wordpress-development-toolkit/blob/master/docs/best
+				-practices-asset-management.md" target="_blank">Action & Filter Hooks</a>
+			</td>
 		</tr>
 		<tr>
 			<td width="100px">
-				<span class="dashicons dashicons-welcome-widgets-menus"></span>
-				<code style="word-wrap: initial;overflow-wrap: initial;">/wp-admin</code></td>
-			<td>Best Practices, Design, Experience, Flows</td>
+				<span class="dashicons dashicons-hammer"></span>
+				<a href="https://github.com/WordPress-Phoenix/wordpress-development-toolkit/blob/master/docs/code.md" target="_blank">
+					PHP, CSS & JavaScript Coding Standards
+				</a>
+			</td>
 		</tr>
 		<tr>
-			<td width="100px"><span class="dashicons dashicons-welcome-write-blog"></span>
-				Docs</td>
-			<td>Inline, Repo, Confluence</td>
-		</tr>
-		<tr>
-			<td width="100px"><span class="dashicons dashicons-randomize"></span> Git</td>
-			<td>Flow, PRs, Reviews, Releases</td>
+			<td width="100px">
+				<span class="dashicons dashicons-lock"></span>
+				<a href="https://github.com/WordPress-Phoenix/wordpress-development-toolkit/blob/master/docs/security.md" target="_blank">
+					Security
+				</a>
+			</td>
 		</tr>
 	</table>
 </script>
 <script id="tmpl-wp-phx-guides-glossaries" type="text/html">
-
+	<small><strong>These guides are fresh and incomplete</strong> and not the best they can be yet! Help contribute!</small>
+	<table width="100%">
+		<tr>
+			<td width="100px">
+				<span class="dashicons dashicons-media-code"></span>
+				<a href="https://github.com/WordPress-Phoenix/wordpress-development-toolkit/blob/master/docs
+				/resources.md" target="_blank">Resources</a>
+			</td>
+		</tr>
+	</table>
 </script>
 <script id="tmpl-wp-phx-help-resources" type="text/html">
 	<div
