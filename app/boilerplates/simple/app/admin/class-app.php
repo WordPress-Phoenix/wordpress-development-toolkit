@@ -2,9 +2,6 @@
 
 namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
 
-// protect file source
-defined( 'ABSPATH' ) or die();
-
 /**
  * Class App
  * @package <%= PKG %>

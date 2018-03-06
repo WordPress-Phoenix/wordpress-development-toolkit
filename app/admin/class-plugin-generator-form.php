@@ -1,6 +1,6 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_1_2\Admin;
+namespace PHX_WP_DEVKIT\V_2_1\Admin;
 
 class Plugin_Generator_Form {
 

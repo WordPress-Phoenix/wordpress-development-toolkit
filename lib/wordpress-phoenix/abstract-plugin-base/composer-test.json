@@ -1,0 +1,12 @@
+{
+  "config": {
+    "bin-dir": "bin",
+    "vendor-dir": "vendor"
+  },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^0.10"
+  },
+  "scripts": {
+    "test": "./bin/phpcs --standard=./.circleci/codesniffer.ruleset.xml --extensions='php,js,css' ./"
+  }
+}

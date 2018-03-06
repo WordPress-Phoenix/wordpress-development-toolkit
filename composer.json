@@ -1,11 +1,28 @@
 {
+  "name": "wordpress-development-toolkit",
+  "description": "",
+  "homepage": "https://github.com/wordpress-phoenix/wordpress-development-toolkit",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+	{
+	  "name": "David Ryan",
+	  "email": "dryanpress@chat.wordpress.org",
+	  "homepage": "https://daveryan.io",
+	  "role": "Developer"
+	}
+  ],
+  "require": {
+	"WordPress-Phoenix/abstract-plugin-base": "^2.5"
+  },
   "require-dev": {
 	"wp-coding-standards/wpcs": "^0.10"
   },
-  "scripts": {
-	"test": "composer lint",
-	"lint": "./vendor/bin/phpcs --standard=./phpcs.xml --extensions='php,js,css' ./",
-	"post-install-cmd": "./vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/",
-	"post-update-cmd": "./vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
+  "config": {
+	"vendor-dir": "lib"
+  },
+  "autoload": {
+	"classmap": [
+	  "/"
+	]
   }
 }

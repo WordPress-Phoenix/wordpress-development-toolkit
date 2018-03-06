@@ -1,16 +1,16 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_1_2;
+namespace PHX_WP_DEVKIT\V_2_1;
 
-use PHX_WP_DEVKIT\V_1_2\Admin;
-use PHX_WP_DEVKIT\V_1_2\Includes;
-use WPAZ_Plugin_Base\V_2_5\Abstract_Plugin;
+use PHX_WP_DEVKIT\V_2_1\Admin;
+use PHX_WP_DEVKIT\V_2_1\Includes;
+use WPAZ_Plugin_Base\V_2_6\Abstract_Plugin as Base;
 
 /**
  * Class Plugin
  * @package Wordpress_development_toolkit
  */
-class Plugin extends Abstract_Plugin {
+class Plugin extends Base {
 
 	/**
 	 * @var string

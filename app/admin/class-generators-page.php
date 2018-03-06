@@ -1,6 +1,6 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_1_2\Admin;
+namespace PHX_WP_DEVKIT\V_2_1\Admin;
 
 class Generators_Page {
 	/**
@@ -51,7 +51,6 @@ class Generators_Page {
 	 */
 	function process_download() {
 		$data = $this->gather_submitted_data();
-		error_log( var_export( $data, true ) );
 		$plugin = isset( $data['plugin_arch_type'] ) ? $data['plugin_arch_type'] : 'simple';
 		$data['generator_version'] = $this->version;
 		new Product_Machine(

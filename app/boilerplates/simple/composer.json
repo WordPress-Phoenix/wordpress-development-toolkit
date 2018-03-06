@@ -1,24 +1,31 @@
 {
-  "name": "usethelinter/<% SLUG %>",
-  "description": "<% DESCRIPTION %>",
-  "keywords": ["wordpress","site-options","utility","helper"],
-  "homepage": "https://github.com/usethelinter/<% SLUG %>",
-  "license": "GPL-3.0-or-later",
+  "name": "<%= DASHES_SLUG %>",
+  "description": "<%= DESC %>",
+  "keywords": [
+	"wordpress",
+	"site-options",
+	"utility",
+	"helper"
+  ],
+  "homepage": "<%= GITHUB_URL %>",
+  "license": "<%= LICENSE_COMPOSER_STR %>",
   "authors": [
 	{
-	  "name": "Code Devwalker",
-	  "email": "code.devwalker@gmail.com",
-	  "homepage": "https://github.com/usethelinter",
+	  "name": "<%= TEAM_NAME %>",
+	  "email": "code.devwalker@domain.test",
+	  "homepage": "<%= GITHUB_URL %>",
 	  "role": "Developer"
 	}
   ],
   "require": {
-	"WordPress-Phoenix/abstract-plugin-base": "^2.5"
+	"WordPress-Phoenix/abstract-plugin-base": "^2.6"
   },
   "config": {
 	"vendor-dir": "lib"
   },
   "autoload": {
-	"classmap": ["/"]
+	"classmap": [
+	  "/"
+	]
   }
 }

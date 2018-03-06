@@ -1,0 +1,62 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.1-node-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: sudo chmod 777 -R ~
+      - run: echo $PWD
+      - run: ls -lart
+      - run: env COMPOSER=composer-test.json composer install --prefer-source --no-interaction
+      - run: sudo ./bin/phpcs --config-set installed_paths $(readlink -f vendor/wp-coding-standards/wpcs/)
+      - run: env COMPOSER=composer-test.json composer test
+  notify:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - run: sudo apt-get install httpie -y
+      - run:
+          name: Notify Slack Channel
+          command: |
+              date=$(date +"%s $*")
+              if [ -z "${DEV_GROUP}" ]; then DEV_GROUP=${CIRCLE_PROJECT_USERNAME}; fi
+              http POST $SLACK_WEBHOOK \
+              channel='#wpphx-github' \
+              username="${DEV_GROUP}-Deploybot" \
+              icon_emoji=':octocat:' \
+              attachments:="
+              [{
+                  \"text\":\"CircleCI build ${CIRCLE_BUILD_NUM}. Release notes coming soon.\",
+                  \"author_name\":\"Github User: ${CIRCLE_USERNAME}\",
+                  \"author_link\":\"https://github.com/${CIRCLE_USERNAME}\",
+                  \"author_icon\":\"\",
+                  \"ts\":\"${date}\",
+                  \"color\":\"#36a64f\",
+                  \"fallback\":\"'t'\",
+                  \"title\":\"'Released ${CIRCLE_PROJECT_REPONAME} version ${CIRCLE_TAG} '\",
+                  \"title_link\":\"${CIRCLE_BUILD_URL}\",
+                  \"footer\":\"'${DEV_GROUP} CircleCI Deployment'\",
+                  \"footer_icon\":\"https://logo.clearbit.com/circleci.com/?size=64\"
+              }]
+              " \
+              -v
+
+workflows:
+  version: 2
+  build-n-notify:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - notify:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/

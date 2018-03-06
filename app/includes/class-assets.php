@@ -1,6 +1,6 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_1_2\Includes;
+namespace PHX_WP_DEVKIT\V_2_1\Includes;
 
 /**
  * Class Assets

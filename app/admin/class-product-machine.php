@@ -1,6 +1,6 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_1_2\Admin;
+namespace PHX_WP_DEVKIT\V_2_1\Admin;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -25,10 +25,9 @@ class Product_Machine {
 		/**
 		 * Each file gets passed through this filter for processing
 		 */
-		add_filter(
-			'wp_phx_plugingen_file_contents',
-			array( $this, 'process_file_contents_via_filter' )
-		);
+		add_filter( 'wp_phx_plugingen_file_contents', array( $this, 'process_file_contents_via_filter' ) );
+
+		// make zip download
 		self::make_zip_download( $filename, $origin_dir, $tmp_dir, $data, $config );
 	}
 
@@ -54,6 +53,7 @@ class Product_Machine {
 		if ( $creation_success ) {
 			// write json containing configuration data
 			$plugin_data = apply_filters( 'wp_phx_plugingen_datazip', array( 'data' => $data, 'config' => $config ) );
+
 			$zip->addFromString( 'plugin-data.json', json_encode( $plugin_data ) );
 			// maybe include license
 			if ( 'gpl' === $data['plugin_license'] ) {
@@ -68,12 +68,14 @@ class Product_Machine {
 
 				// VITAL FOR ALL FILES: give file relative path for zip
 				$current_file_stub = str_replace( trailingslashit( $origin_dir ), '', $current_file );
+
 				// Run WordPress Filter on File
 				$processed_file = apply_filters( 'wp_phx_plugingen_file_contents', [
 					'contents' => file_get_contents( $current_file ), // modified
 					'filename' => $current_file_stub, // modified
 					'data'     => $data, // data passthru, for read only
 				] );
+
 				// add maybe renamed, maybe rebuilt file to new zip
 				if ( is_array( $processed_file ) && ! empty( $processed_file['contents'] ) && is_string( $processed_file['contents'] ) ) {
 					$zip->addFromString( $processed_file['filename'], $processed_file['contents'] );
@@ -105,6 +107,12 @@ class Product_Machine {
 		}
 	}
 
+	/**
+	 * Main file processor used by generator to filter a file's contents and filename
+	 * @param $file
+	 *
+	 * @return array
+	 */
 	function process_file_contents_via_filter( $file ) {
 		if (
 			empty( $file )
@@ -122,6 +130,11 @@ class Product_Machine {
 		return $file;
 	}
 
+	/**
+	 * @param $file
+	 *
+	 * @return mixed
+	 */
 	static function process_file_contents( $file ) {
 		$contents = $file['contents'];
 		$d        = $file['data'];
@@ -138,12 +151,15 @@ class Product_Machine {
 		$important_files = apply_filters( 'wp_phx_plugingen_file_contents', array(
 			'main.php',
 			'README.md',
+			'composer.json',
 		) );
 
 		if ( in_array( $filename, $important_files ) ) {
 			$contents = str_ireplace( '<%= AUTHORS %>', $d['plugin_authors'], $contents );
+			$contents = str_ireplace( '<%= TEAM_NAME %>', ! empty( $d['plugin_teamorg'] ) ? $d['plugin_teamorg'] : '', $contents );
 			$contents = str_ireplace( '<%= TEAM %>', ! empty( $d['plugin_teamorg'] ) ? ' - ' . $d['plugin_teamorg'] : '', $contents );
 			$contents = str_ireplace( '<%= LICENSE_TEXT %>', self::version_text( $d ), $contents );
+			$contents = str_ireplace( '<%= LICENSE_COMPOSER_STR %>', self::version_composer( $d ), $contents );
 			$contents = str_ireplace( '<%= VERSION %>', ! empty( $d['plugin_ver'] ) ? $d['plugin_ver'] : '0.1.0', $contents );
 			$contents = str_ireplace( '<%= DESC %>', $d['plugin_description'], $contents );
 			if ( ! empty( $d['plugin_url'] ) ) {
@@ -176,6 +192,22 @@ class Product_Machine {
 			}
 		} else {
 			return 'Unlicensed [Error in plugin generation].';
+		}
+	}
+
+	static function version_composer( $data ) {
+		if ( isset( $data['plugin_license'] ) ) {
+			switch ( $data['plugin_license'] ) {
+				case 'private':
+					return 'proprietary';
+					break;
+				case 'gpl':
+				default:
+					return 'GPL-3.0-or-later';
+					break;
+			}
+		} else {
+			return 'proprietary';
 		}
 	}
 

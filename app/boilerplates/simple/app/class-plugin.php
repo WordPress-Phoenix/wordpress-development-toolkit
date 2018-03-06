@@ -5,7 +5,11 @@ namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>;
 use <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
 use WPAZ_Plugin_Base\V_2_6\Abstract_Plugin;
 
-defined( 'ABSPATH' ) or die(); // protect file source
+if ( ! function_exists( 'add_filter' ) ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit(); /* protects plugin source from public view */
+}
 
 /**
  * Class Plugin
