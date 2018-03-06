@@ -13,7 +13,7 @@
 * [Locutus.io/php](https://locutus.io/php) -- Common PHP methods ported to JavaScript.
 * [YouMightNotNeedjQuery.com](http://youmightnotneedjquery.com) -- An explainer on using native JavaScript alternatives to jQuery.
 
-Great Topical Guides / Blogs
+### Great Topical Guides / Blogs
 * [Understanding WordPress Directory Structure](https://www.rarst.net/wordpress/directory-structure/)
 * [10 WordPress Things I've Learned Working With 10Up](http://rachievee.com/10-wordpress-things-ive-learned-working-with-10up/)
 * [Intro to Underscore.js Templates in WordPress](https://themehybrid.com/weblog/intro-to-underscore-js-templates-in-wordpress)
