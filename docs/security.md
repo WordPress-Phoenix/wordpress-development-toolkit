@@ -1,5 +1,7 @@
 # On WordPress Security
 
+### THIS PAGE NEEDS FORMATTING AND COMPLETION, PRs welcome!
+
 * Using Nonces
 
 The primary security mechanism in WordPress is nonces. Nonces are time-stamped and tap into the logged-in user cookie. All nonces in the WordPress Admin leveraging the REST API should use the `wp_rest` action ( `wp_create_nonce('wp_rest')` ) and be passed via either the `_wpnonce` data param (GET or POST) or the `X-WP-Nonce` header.
