@@ -122,31 +122,6 @@ class Toolkit_Dashboard_Page {
 
 	function localize_data() {
 		$data = array();
-		$data['status'] = array();
-
-		$constants = array(
-			'SCRIPT_DEBUG', // disable script compression
-			'WP_DEBUG',
-			'WP_DEBUG_LOG',
-			'WP_DEBUG_DISPLAY',
-			'DISABLE_WP_CHRON',
-			'WP_CRON_LOCK_TIMEOUT',
-			'WP_MAX_MEMORY_LIMIT',
-			'WP_MEMORY_LIMIT',
-			'DB_CHARSET',
-			'DB_COLLATE',
-			'FS_CHMOD_DIR', // r/w perms for directories default 0755
-			'FS_CHMOD_FILE', // r/w for files default 0644
-			'FS_METHOD', // method of connection
-			'FORCE_SSL_LOGIN',
-			'FORCE_SSL_ADMIN',
-		);
-
-		foreach( $constants as $constant ) {
-			if ( defined( $constant ) ) {
-				$data['status'][ $constant ] = constant( $constant );
-			}
-		}
 
 		$cards = $this->get_admin_cards();
 		if ( ! empty( $cards ) && is_array( $cards ) ) {

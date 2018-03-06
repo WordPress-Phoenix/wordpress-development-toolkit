@@ -36,11 +36,11 @@ class Init {
 		$this->version       = $version;
 
 		// handle global assets
-		new Assets(
-			$this->installed_dir,
-			$this->installed_url,
-			$version
-		);
+//		new Assets(
+//			$this->installed_dir,
+//			$this->installed_url,
+//			$version
+//		);
 		// Ex. add_action( 'init', array( $this, 'function_in_this_class' ) );
 	}
 
