@@ -1,4 +1,7 @@
 # WordPress Development Toolkit
+![Dash](dash.png)
+
+![Preview](example.png)
 
 1. Download and install plugin (should NOT be run in production environments on high-traffic servers where 
 performance matters...).
