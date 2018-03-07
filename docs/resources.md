@@ -10,7 +10,7 @@
 
 * [10Up Engineering Standards & Best Practices](https://10up.github.io/Engineering-Best-Practices/) [(forked XWP copy of standards)](https://xwp.github.io/engineering-best-practices/)
 * [WordPress.com VIP "What We Look For"](https://vip.wordpress.com/documentation/code-review-what-we-look-for/)
-* [Locutus.io/php](https://locutus.io/php) -- Common PHP methods ported to JavaScript.
+* [Locutus.io/php](http://locutus.io/php) -- Common PHP methods ported to JavaScript.
 * [YouMightNotNeedjQuery.com](http://youmightnotneedjquery.com) -- An explainer on using native JavaScript alternatives to jQuery.
 
 ### Great Topical Guides / Blogs
