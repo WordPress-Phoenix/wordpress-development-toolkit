@@ -15,9 +15,6 @@
   "require": {
 	"WordPress-Phoenix/abstract-plugin-base": "^2.5"
   },
-  "require-dev": {
-	"wp-coding-standards/wpcs": "^0.10"
-  },
   "config": {
 	"vendor-dir": "lib"
   },
