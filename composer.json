@@ -1,10 +1,9 @@
 {
   "name": "wordpress-phoenix/wordpress-development-toolkit",
-  "description": "",
+  "description": "Generate WordPress Plugins using our Abstract Plugin Boilerplate",
   "homepage": "https://github.com/wordpress-phoenix/wordpress-development-toolkit",
   "license": "GPL-3.0-or-later",
   "type": "wordpress-plugin",
-  "version": "master",
   "authors": [
     {
       "name": "David Ryan",
@@ -24,10 +23,5 @@
   },
   "config": {
     "vendor-dir": "lib"
-  },
-  "autoload": {
-    "classmap": [
-      "/"
-    ]
   }
 }
