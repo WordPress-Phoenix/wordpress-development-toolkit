@@ -3,6 +3,7 @@
   "description": "",
   "homepage": "https://github.com/wordpress-phoenix/wordpress-development-toolkit",
   "license": "GPL-3.0-or-later",
+  "type": "wordpress-plugin",
   "authors": [
 	{
 	  "name": "David Ryan",
