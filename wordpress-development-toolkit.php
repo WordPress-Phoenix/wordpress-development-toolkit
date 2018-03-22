@@ -6,7 +6,7 @@
  * @author      David Ryan - WordPress Phoenix
  * @license     GNU GPL v2.0+
  * @link        https://github.com/wordpress-phoenix
- * @version     3.0.0
+ * @version     3.0.1
  *
  * Built using WP PHX Plugin Generator v1.1.0 on Tuesday 23rd of January 2018 07:33:12 AM
  * @link https://github.com/WordPress-Phoenix/wordpress-development-toolkit
