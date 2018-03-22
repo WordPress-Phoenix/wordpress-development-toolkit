@@ -4,7 +4,7 @@
  *
  * @author  Seth Carstens
  * @package abtract-plugin-base
- * @version 2.6.0
+ * @version 2.6.2
  * @license GPL 2.0 - please retain comments that express original build of this file by the author.
  */
 
@@ -122,7 +122,7 @@ abstract class Abstract_Plugin {
 	 *
 	 * @var array $plugin_data Array of meta data representing meta from main plugin file
 	 */
-	public $plugin_data = array();
+	public $plugin_data = [];
 
 	/**
 	 * If plugin_data is built, this represents the version number defined the the main plugin file meta
@@ -155,6 +155,7 @@ abstract class Abstract_Plugin {
 
 	/**
 	 * First thing setup by class with provided namespace for use as prefix in WordPress hooks & actions
+	 *
 	 * @var string
 	 */
 	public $wp_hook_pre = '';
@@ -165,13 +166,13 @@ abstract class Abstract_Plugin {
 	 */
 	public function __construct() {
 
-		// setup hook prefix used to create unique actions/filters unique to this plugin
+		// Setup hook prefix used to create unique actions/filters unique to this plugin.
 		$this->wp_hook_pre = trim( strtolower( str_ireplace( '\\', '_', get_called_class() ) ) ) . '_';
 
 		// Hook can be used by mu plugins to modify plugin behavior after plugin is setup.
 		do_action( $this->wp_hook_pre . '_preface', $this );
 
-		// configure and setup the plugin class variables.
+		// Configure and setup the plugin class variables.
 		$this->configure_defaults();
 
 		// Define globals used by the plugin including bloginfo.
@@ -179,17 +180,17 @@ abstract class Abstract_Plugin {
 
 		// If enabled, register auto-loading to include any files in the $autoload_dir.
 		if ( ! empty( static::$autoload_type ) ) {
-			spl_autoload_register( array( $this, 'autoload' ) );
+			spl_autoload_register( [ $this, 'autoload' ] );
 		}
 
 		// Onload to do things during plugin construction.
 		$this->onload( $this );
 
 		// Most actions go into init which loads after WordPress core sets up all the defaults.
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'init', [ $this, 'init' ] );
 
 		// Init for use with logged in users, see this::authenticated_init for more details.
-		add_action( 'init', array( $this, 'authenticated_init' ) );
+		add_action( 'init', [ $this, 'authenticated_init' ] );
 
 		// Hook can be used by mu plugins to modify plugin behavior after plugin is setup.
 		do_action( $this->wp_hook_pre . '_setup', $this );
@@ -227,7 +228,7 @@ abstract class Abstract_Plugin {
 		$intersect            = array_intersect_assoc( $parent, $class_array );
 		$intersect_depth      = count( $intersect );
 		$autoload_match_depth = static::$autoload_ns_match_depth;
-		// Confirm $class is in same namespace as this autoloader
+		// Confirm $class is in same namespace as this autoloader.
 		if ( $intersect_depth >= $autoload_match_depth ) {
 			$file = $this->get_file_name_from_class( $class );
 			if ( 'classmap' === static::$autoload_type && is_array( $this->autoload_dir ) ) {
@@ -259,7 +260,7 @@ abstract class Abstract_Plugin {
 
 		if ( file_exists( $this->plugin_file ) ) {
 			$this->installed_url = plugins_url( '/', $this->plugin_file );
-			// Ensure get_plugin_data is available
+			// Ensure get_plugin_data is available.
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			$this->plugin_data = get_plugin_data( $this->plugin_file, $markup = true, $translate = true );
 			if ( is_array( $this->plugin_data ) && isset( $this->plugin_data['Version'] ) ) {
@@ -295,8 +296,8 @@ abstract class Abstract_Plugin {
 	/**
 	 * Dirname function that mimics PHP7 dirname() enhancements so that we can enable PHP5.6 support.
 	 *
-	 * @param     $path
-	 * @param int $count
+	 * @param string $path Path to this specific plugins directory.
+	 * @param int    $count How many directories to look upwards.
 	 *
 	 * @return string
 	 */
@@ -325,8 +326,8 @@ abstract class Abstract_Plugin {
 		$path_info        = pathinfo( $path_info );
 		$converted_dir    = str_replace( '/', '\\', $path_info['dirname'] );
 		$converted_dir    = ucwords( $converted_dir, '_\\' );
-		$filename_search  = array( static::$filename_prefix, '-' );
-		$filename_replace = array( '', '_' );
+		$filename_search  = [ static::$filename_prefix, '-' ];
+		$filename_replace = [ '', '_' ];
 		$class            = str_ireplace( $filename_search, $filename_replace, $path_info['filename'] );
 		$class_name       = $namespace . $converted_dir . '\\' . ucwords( $class, '_' );
 
@@ -407,7 +408,7 @@ abstract class Abstract_Plugin {
 	/**
 	 * Take a namespaced class name and turn it into a file name.
 	 *
-	 * @param  string $class
+	 * @param  string $class The name of the class to load.
 	 *
 	 * @return string
 	 */
@@ -415,11 +416,11 @@ abstract class Abstract_Plugin {
 		$class = strtolower( $class );
 		if ( stristr( $class, '\\' ) ) {
 
-			// if the first item is == the collection name, trim it off
+			// If the first item is == the collection name, trim it off.
 			$class = str_ireplace( static::$autoload_class_prefix, '', $class );
 
 			// Maybe fix formatting underscores to dashes and double to single slashes.
-			$class     = str_replace( array( '_', '\\' ), array( '-', '/' ), $class );
+			$class     = str_replace( [ '_', '\\' ], [ '-', '/' ], $class );
 			$class     = explode( '/', $class );
 			$file_name = &$class[ count( $class ) - 1 ];
 			$file_name = static::$filename_prefix . $file_name . '.php';
@@ -434,19 +435,19 @@ abstract class Abstract_Plugin {
 	/**
 	 * Setup special hooks that don't run after plugins_loaded action
 	 *
-	 * @param $file
+	 * @param string $file File location on the server, passed in and used to build other paths.
 	 */
 	public static function run( $file ) {
 		// Logic required for WordPress VIP plugins to load during themes function file initialization.
 		if ( did_action( 'plugins_loaded' ) ) {
-			add_action( 'init', array( get_called_class(), 'load' ), 1 );
+			add_action( 'init', [ get_called_class(), 'load' ], 1 );
 		} else {
-			add_action( 'plugins_loaded', array( get_called_class(), 'load' ) );
+			add_action( 'plugins_loaded', [ get_called_class(), 'load' ] );
 		}
 		// Installation and un-installation hooks.
-		register_activation_hook( $file, array( get_called_class(), 'activate' ) );
-		register_deactivation_hook( $file, array( get_called_class(), 'deactivate' ) );
-		register_uninstall_hook( $file, array( get_called_class(), 'uninstall' ) );
+		register_activation_hook( $file, [ get_called_class(), 'activate' ] );
+		register_deactivation_hook( $file, [ get_called_class(), 'deactivate' ] );
+		register_uninstall_hook( $file, [ get_called_class(), 'uninstall' ] );
 	}
 
 	/**

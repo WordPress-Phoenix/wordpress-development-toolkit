@@ -1,7 +1,7 @@
 # Abstract Plugin Base
 Used as a base class to help standardize the way we build WordPress plugins.
 
-CircleCI Build: [![CircleCI](https://circleci.com/gh/WordPress-Phoenix/wordpress-options-builder-class.svg?style=svg)](https://circleci.com/gh/WordPress-Phoenix/wordpress-options-builder-class)
+CircleCI Build: [![CircleCI](https://circleci.com/gh/WordPress-Phoenix/abstract-plugin-base.svg?style=svg)](https://circleci.com/gh/WordPress-Phoenix/abstract-plugin-base)
 
 # WordPress Options Builder Class Library
 

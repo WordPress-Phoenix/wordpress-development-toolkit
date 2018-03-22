@@ -1,3 +1,6 @@
+#### 2.6.2
+* Codesniffer recommended changes
+
 #### 2.6.1
 * Hotfix namespace version to match minor version number update.
 * Added $wp_hook_pre for better action prefixes
