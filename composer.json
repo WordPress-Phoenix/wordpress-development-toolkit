@@ -6,24 +6,28 @@
   "type": "wordpress-plugin",
   "version": "master",
   "authors": [
-	{
-	  "name": "David Ryan",
-	  "email": "dryanpress@chat.wordpress.org",
-	  "homepage": "https://daveryan.io",
-	  "role": "Developer"
-	}
+    {
+      "name": "David Ryan",
+      "email": "dryanpress@chat.wordpress.org",
+      "homepage": "https://daveryan.io",
+      "role": "Developer"
+    }
   ],
   "require": {
-	"WordPress-Phoenix/abstract-plugin-base": "^2.5",
-	"php": ">=5.3.2",
-	"composer/installers": "v1.0.6"
+    "WordPress-Phoenix/abstract-plugin-base": "^2.5",
+    "php": ">=5.3.2",
+    "composer/installers": "v1.0.6"
+  },
+  "dist": {
+    "url": "git@github.com:WordPress-Phoenix/wordpress-development-toolkit.git",
+    "type": "git"
   },
   "config": {
-	"vendor-dir": "lib"
+    "vendor-dir": "lib"
   },
   "autoload": {
-	"classmap": [
-	  "/"
-	]
+    "classmap": [
+      "/"
+    ]
   }
 }
