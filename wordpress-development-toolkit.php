@@ -20,7 +20,8 @@
  * Text Domain: wordpress-development-toolkit
  * License: GNU GPL v2.0+
  */
-if ( ! function_exists( 'add_filter' ) ) { // prevent snooping file source, check wp loaded
+
+if ( ! function_exists( 'add_filter' ) ) { // Prevent snooping file source, check wp loaded.
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit();
@@ -47,4 +48,3 @@ if ( ! class_exists( 'PHX_WP_DEVKIT\\V_3_0\\Plugin' ) ) {
  * Start WordPress Development Toolkit Main Plugin Class
  */
 PHX_WP_DEVKIT\V_3_0\Plugin::run( __FILE__ );
-// Please don't edit below this line.
