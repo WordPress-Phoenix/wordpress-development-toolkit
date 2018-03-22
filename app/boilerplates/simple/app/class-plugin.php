@@ -1,8 +1,14 @@
 <?php
+/**
+ * Plugin <%= SECONDARY_NAMESPACE %>
+ *
+ * @package WordPress
+ * @subpackage <%= PKG %>
+ */
 
 namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>;
 
-use <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
+use <%= PRIMARY_NAMESPACE %>\< %= SECONDARY_NAMESPACE %>\Admin;;
 use <%= ABSTRACT_PLUGIN_NAMESPACE %>\Abstract_Plugin;
 
 if ( ! function_exists( 'add_filter' ) ) {
@@ -13,38 +19,38 @@ if ( ! function_exists( 'add_filter' ) ) {
 
 /**
  * Class Plugin
- * @package <%= PKG %>
  */
 class Plugin extends Abstract_Plugin {
 
 	/**
-	 * @var string
+	 * Use magic constant to tell abstract class current namespace as prefix for all other namespaces in the plugin.
+	 *
+	 * @var string $autoload_class_prefix magic constant
 	 */
 	public static $autoload_class_prefix = __NAMESPACE__;
 
 	/**
-	 * @var string
-	 */
-	public static $autoload_type = 'psr-4';
-
-	/**
-	 * @var int
-	 */
-	public static $autoload_ns_match_depth = 2;
-
-	/**
+	 * Action prefix is used to automatically and dynamically assign a prefix to all action hooks.
+	 *
 	 * @var string
 	 */
 	public static $action_prefix = '<%= US_SLUG %>_';
 
 	/**
-	 * @var string
+	 * Magic constant trick that allows extended classes to pull actual server file location, copy into subclass.
+	 *
+	 * @var string $current_file
 	 */
 	protected static $current_file = __FILE__;
 
 
 	/**
-	 * @param mixed $instance
+	 * Initialize the plugin - for public (front end)
+	 *
+	 * @param mixed $instance Parent instance passed through to child.
+	 *
+	 * @since   0.1
+	 * @return  void
 	 */
 	public function onload( $instance ) {
 	}
@@ -64,7 +70,7 @@ class Plugin extends Abstract_Plugin {
 	public function authenticated_init() {
 		if ( is_user_logged_in() ) {
 			do_action( static::$action_prefix . 'before_authenticated_init' );
-			// $this->admin is in the abstract plugin base class
+			// Object $this->admin is in the abstract plugin base class.
 			$this->admin = new Admin\App(
 				$this->installed_dir,
 				$this->installed_url,

@@ -22,10 +22,5 @@
   },
   "config": {
 	"vendor-dir": "lib"
-  },
-  "autoload": {
-	"classmap": [
-	  "/"
-	]
   }
 }
