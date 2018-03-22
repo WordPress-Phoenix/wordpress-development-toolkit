@@ -6,7 +6,7 @@
  * @author      David Ryan - WordPress Phoenix
  * @license     GNU GPL v2.0+
  * @link        https://github.com/wordpress-phoenix
- * @version     3.0.1
+ * @version     3.1.0
  *
  * Built using WP PHX Plugin Generator v1.1.0 on Tuesday 23rd of January 2018 07:33:12 AM
  * @link https://github.com/WordPress-Phoenix/wordpress-development-toolkit
@@ -15,7 +15,7 @@
  * Plugin Name: WordPress Development Toolkit
  * Plugin URI: https://github.com/wordpress-phoenix
  * Description: Tools and resources for WordPress development.
- * Version: 3.0.0
+ * Version: 3.1.0
  * Author: David Ryan  - WordPress Phoenix
  * Text Domain: wordpress-development-toolkit
  * License: GNU GPL v2.0+
