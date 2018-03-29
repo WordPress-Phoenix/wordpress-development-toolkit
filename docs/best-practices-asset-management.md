@@ -8,16 +8,19 @@ This is a matter of preference and judgement, but these registrations are super 
 
 Always register CSS and JavaScript first instead of directly enqueueing them. This makes dequeueing easier for other products interacting with your dependency in the environment.
 
-###### Additionally, always register assets globally. Never scope a script registration inside `is_admin()` or another check to prevent registration collision.
+###### Always register assets globally
 
-#### Store dependency handles in accessible variables and constants
+Never scope a script registration inside `is_admin()` or another check to prevent registration collision.
 
-When registering CSS or JS within a PHP class, always store the asset handle as a class variable. When registering a dependency outside a class, define a PHP constant. This allows the entire class and application interact programmatically with the asset, preventing string scavenger hunts across files and easing rename.
+#### Store the string used to register/enqueue an asset in a static class variable or PHP constant
+
+This allows the entire class and application interact programmatically with the asset, preventing string scavenger hunts across files and easing rename.
 
 #### Naming dependency handle slugs
 * **This is a global namespace**. Be creative, be courteous, be concise, be clear and be defensive.
-* Please don't describe the asset with a postfix like `-js`, `-css`, `-script`, `-style` -- WordPress will add postfixes when printing assets in the DOM, resulting in `something-js-js`. However, if a product is called purecss or momentjs, we then use the full slug with repetitive postfix, despite repetion (i.e. `purecss-css`)
-* When appropriate, try to match the filename. This makes life easier and applications scale nicer.
+* **Please don't use a postfix like `-js`, `-css`, `-script`, `-style`** -- WordPress will add postfixes when printing assets in the DOM, resulting in `something-js-js`. However, if a product is called purecss or momentjs, we then use the full slug with repetitive postfix, despite repetion (i.e. `purecss-css`)
+* **Try to keep parity between filename and dependency string**. This makes life easier and applications scale nicer.
+* **Plan for growth: avoid calling dependency "my-product.ext."** Use `-primary`, `-core` or `-main` prefix.
 * Never use WordPress Filters or difficult-to-predict dynamic variables to register asset handles so others may dequeue and register handles with confidence.
 
 #### Leverage dependency chaining and the `array()` method for `wp_enqueue_*()`
