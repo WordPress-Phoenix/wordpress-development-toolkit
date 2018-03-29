@@ -28,7 +28,7 @@ This allows the entire class and application interact programmatically with the 
 * **This is a global namespace**. Be creative, be courteous, be concise, be clear and be defensive.
 * **Please don't use a postfix like `-js`, `-css`, `-script`, `-style`** -- WordPress will add postfixes when printing assets in the DOM, resulting in `something-js-js`. However, if a product is called purecss or momentjs, we then use the full slug with repetitive postfix, despite repetion (i.e. `purecss-css`)
 * **Try to keep parity between filename and dependency string**. This makes life easier and applications scale nicer.
-* **Plan for growth: avoid calling dependency "my-product.ext."** Use `-primary`, `-core` or `-main` prefix.
+* **Plan for growth: avoid calling dependency `my-product`** Use `-primary`, `-core` or `-main` postfix.
 * **Never use WordPress Filters or difficult-to-predict dynamic variables** so others may dequeue and register handles with confidence.
 
 #### Leverage dependency chaining and the `array()` method for `wp_enqueue_*()`
