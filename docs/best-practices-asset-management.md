@@ -6,7 +6,7 @@ This approach allows WordPress to:
   1. Load registered dependencies
   1. Chose the printing order & location of files in the DOM
   1. Print inline script/style alongside referenced files
-  1. Print inline js variables preceeding scripts to make PHP data available to the script via the Window variable (`wp_localize_script()` -- originally used for "localizing" translated strings from WordPress language packs into in labels needed in scripts).
+  1. Print inline js variables to make PHP data safely available to the script via the Window variable (`wp_localize_script()` -- originally used for "localizing" translated strings from WordPress language packs into in labels needed in scripts).
 
 #### Break `wp_register_script()` and `wp_register_style()` arguments onto their own lines
 
