@@ -1,6 +1,6 @@
 # WordPress Asset Management Best Practices
 
-##### WordPress uses internal functions to register (`wp_register_script()` & `wp_register_style()`) and enqueue (`wp_enqueue_script()` & `wp-enqueue_style()` static JavaScript and CSS files so that WordPress Core, Themes and Plugins can **programatically interact with scripts and styles.**
+##### WordPress uses internal functions to register *(`wp_register_script()` & `wp_register_style()`)* and enqueue *(`wp_enqueue_script()` & `wp-enqueue_style()`)* static JavaScript and CSS files so that WordPress Core, Themes and Plugins can **programatically interact with scripts and styles.**
 
 This approach allows WordPress to:
   1. Load registered dependencies
