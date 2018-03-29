@@ -10,7 +10,7 @@ Always register CSS and JavaScript first instead of directly enqueueing them. Th
 
 #### Always register assets globally
 
-Never scope a script registration inside `is_admin()` or another check to prevent registration collision.
+Never scope a script registration inside `is_admin()` or another check to prevent registration collision. Only scope enqueues.
 
 #### Store the string used to register/enqueue an asset in a static class variable or PHP constant
 
