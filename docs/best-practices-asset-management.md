@@ -1,5 +1,13 @@
 # WordPress Asset Management Best Practices
 
+WordPress uses internal functions to register (`wp_register_script()` & `wp_register_style()`) and enqueue (`wp_enqueue_script()` & `wp-enqueue_style()` static JavaScript and CSS files so that WordPress Core, Themes and Plugins can **programatically interact with scripts and styles.**
+
+This approach allows WordPress to:
+  1. Load registered dependencies
+  1. Chose the printing order & location of files in the DOM
+  1. Print inline script/style alongside referenced files
+  1. Print inline js variables preceeding scripts to make PHP data available to the script via the Window variable (`wp_localize_script()` -- originally used for "localizing" translation strings in scripts).
+
 #### Break `wp_register_script()` and `wp_register_style()` arguments onto their own lines
 
 This is a matter of preference and judgement, but these registrations are super important, often overrun 80 characters and are worth breaking out to multiple lines for easy locating in files and nice code hygene.
@@ -56,3 +64,6 @@ Plus at time of writing it's 2017 and React and Vue-based apps, use of JavaScrip
 
 #### Provide a version string for caching
 We recommend tying product assets the version for the Theme or Plugin you're in. Having a condition that checks for local environments (i.e. check request string for ".test") and toggling between a production version and `time()` is another good option for cache-busting on a local env.
+
+###### NEW: Working with Assets containing cache-hash
+Often when working with JavaScript SPA frameworks and tools, a unique hash is generated in the filename. To account for these assets
