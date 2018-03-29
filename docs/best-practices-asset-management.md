@@ -1,6 +1,6 @@
 # WordPress Asset Management Best Practices
 
-WordPress uses internal functions to register (`wp_register_script()` & `wp_register_style()`) and enqueue (`wp_enqueue_script()` & `wp-enqueue_style()` static JavaScript and CSS files so that WordPress Core, Themes and Plugins can **programatically interact with scripts and styles.**
+##### WordPress uses internal functions to register (`wp_register_script()` & `wp_register_style()`) and enqueue (`wp_enqueue_script()` & `wp-enqueue_style()` static JavaScript and CSS files so that WordPress Core, Themes and Plugins can **programatically interact with scripts and styles.**
 
 This approach allows WordPress to:
   1. Load registered dependencies
@@ -29,7 +29,7 @@ This allows the entire class and application interact programmatically with the 
 * **Please don't use a postfix like `-js`, `-css`, `-script`, `-style`** -- WordPress will add postfixes when printing assets in the DOM, resulting in `something-js-js`. However, if a product is called purecss or momentjs, we then use the full slug with repetitive postfix, despite repetion (i.e. `purecss-css`)
 * **Try to keep parity between filename and dependency string**. This makes life easier and applications scale nicer.
 * **Plan for growth: avoid calling dependency "my-product.ext."** Use `-primary`, `-core` or `-main` prefix.
-* Never use WordPress Filters or difficult-to-predict dynamic variables to register asset handles so others may dequeue and register handles with confidence.
+* **Never use WordPress Filters or difficult-to-predict dynamic variables** so others may dequeue and register handles with confidence.
 
 #### Leverage dependency chaining and the `array()` method for `wp_enqueue_*()`
 
