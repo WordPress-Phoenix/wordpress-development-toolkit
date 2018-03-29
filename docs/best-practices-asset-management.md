@@ -8,7 +8,7 @@ This is a matter of preference and judgement, but these registrations are super 
 
 Always register CSS and JavaScript first instead of directly enqueueing them. This makes dequeueing easier for other products interacting with your dependency in the environment.
 
-###### Always register assets globally
+#### Always register assets globally
 
 Never scope a script registration inside `is_admin()` or another check to prevent registration collision.
 
