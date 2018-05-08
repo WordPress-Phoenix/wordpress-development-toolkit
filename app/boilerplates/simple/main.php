@@ -43,4 +43,4 @@ if ( ! class_exists( '<%= ABSTRACT_PLUGIN_NAMESPACE_CHECK %>\\Abstract_Plugin' )
  */
 include_once $current_dir . 'app/class-plugin.php';
 
-< %= PRIMARY_NAMESPACE %>\< %= SECONDARY_NAMESPACE %>\Plugin::run( __FILE__ );
+<%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Plugin::run( __FILE__ );
