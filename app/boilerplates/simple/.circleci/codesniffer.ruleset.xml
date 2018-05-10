@@ -5,6 +5,6 @@
     <exclude-pattern>lib/composer/*</exclude-pattern>
     <exclude-pattern>assets/*</exclude-pattern>
     <rule ref="WordPress-VIP"></rule>
-   	<rule ref="WordPress-Core"></rule>
-	<rule ref="WordPress"></rule>
+    <rule ref="WordPress-Core"></rule>
+    <rule ref="WordPress"></rule>
 </ruleset>
