@@ -4,7 +4,10 @@
     <exclude-pattern>vendor/*</exclude-pattern>
     <exclude-pattern>lib/composer/*</exclude-pattern>
     <exclude-pattern>assets/*</exclude-pattern>
-    <rule ref="WordPress-VIP"></rule>
+    <rule ref="WordPress-VIP">
+        <exclude name="WordPress.VIP.SuperGlobalInputUsage" />
+        <exclude name="WordPress.VIP.RestrictedFunctions.switch_to_blog" />
+    </rule>
     <rule ref="WordPress-Core"></rule>
     <rule ref="WordPress"></rule>
 </ruleset>
