@@ -8,7 +8,6 @@
  * @author         <%= AUTHORS %><%= TEAM %>
  * @license        <%= LICENSE_TEXT %>
  * @link           <%= URL %>
- * @version        <%= VERSION %>
  *
  * Built with WP PHX WordPress Development Toolkit v<%= GENERATOR_VERSION %> on <%= CURRENT_TIME %>
  * @link           https://github.com/WordPress-Phoenix/wordpress-development-toolkit
