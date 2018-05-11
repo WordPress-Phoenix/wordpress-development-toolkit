@@ -22,7 +22,7 @@
  * License: <%= LICENSE_TEXT %>
  */
 
-defined( 'ABSPATH' ) or die(); // wordpress must exist
+defined( 'ABSPATH' ) or die(); // WordPress must exist.
 
 $current_dir = trailingslashit( dirname( __FILE__ ) );
 
