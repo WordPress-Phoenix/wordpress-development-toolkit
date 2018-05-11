@@ -117,15 +117,6 @@ class Product_Machine {
 				}
 			}
 
-
-
-			// only run these operations for standard plugins
-			// add empties to key directories
-			$blank_file = '<?php ' . PHP_EOL . '// *gentle wave* not the code you\'re looking for..' . PHP_EOL;
-			$idx        = '/index.php';
-			$zip->addFromString( 'app' . $idx, $blank_file );
-			$zip->addFromString( 'app/admin' . $idx, $blank_file );
-
 			// close zip
 			$zip->close();
 
