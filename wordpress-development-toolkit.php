@@ -47,4 +47,4 @@ if ( ! class_exists( 'PHX_WP_DEVKIT\\V_3_1\\Plugin' ) ) {
 /**
  * Start WordPress Development Toolkit Main Plugin Class
  */
-PHX_WP_DEVKIT\V_3_0\Plugin::run( __FILE__ );
+PHX_WP_DEVKIT\V_3_1\Plugin::run( __FILE__ );
