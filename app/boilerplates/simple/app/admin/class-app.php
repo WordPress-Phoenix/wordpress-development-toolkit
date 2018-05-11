@@ -46,7 +46,7 @@ class App {
 		$this->installed_url = $installed_url;
 		$this->version       = $version;
 
-		// Put your new Class() or add_action() here.
+		// Put your new PHP Class or add_action method here.
 	}
 
 }
