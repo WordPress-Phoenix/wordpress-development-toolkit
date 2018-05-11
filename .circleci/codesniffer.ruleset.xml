@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="<%= DASHES_SLUG %>-wp-plugin">
+<ruleset name="wp-dev-toolkit-wp-plugin">
     <description>Custom plugin codesniffer exceptions.</description>
     <exclude-pattern>vendor/*</exclude-pattern>
     <exclude-pattern>lib/composer/*</exclude-pattern>
