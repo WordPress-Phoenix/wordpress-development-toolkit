@@ -180,7 +180,8 @@ class Product_Machine {
 			'main.php',
 			'README.md',
 			'composer.json',
-			'app/class-plugin.php'
+			'app/class-plugin.php',
+			'.circleci/codesniffer.ruleset.xml',
 		) );
 
 		if ( in_array( $filename, $important_files ) ) {
