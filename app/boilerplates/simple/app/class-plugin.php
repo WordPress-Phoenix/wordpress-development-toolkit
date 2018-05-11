@@ -81,6 +81,8 @@ class Plugin extends Abstract_Plugin {
 	}
 
 	/**
+	 * Defines and Globals.
+	 *
 	 * @return mixed|void
 	 */
 	protected function defines_and_globals() {
