@@ -1,3 +1,6 @@
+<?php
+// start that php
+?>
 <script id="tmpl-wp-phx-tools" type="text/html">
 	<table width="100%">
 		<tr>

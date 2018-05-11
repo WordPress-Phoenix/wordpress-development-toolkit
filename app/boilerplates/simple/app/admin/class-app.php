@@ -6,7 +6,7 @@
  * @subpackage <%= PKG %>
  */
 
-namespace < %= PRIMARY_NAMESPACE %>\< %= SECONDARY_NAMESPACE %>\Admin;
+namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
 
 /**
  * Class App

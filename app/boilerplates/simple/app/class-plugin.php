@@ -8,7 +8,7 @@
 
 namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>;
 
-use <%= PRIMARY_NAMESPACE %>\< %= SECONDARY_NAMESPACE %>\Admin;;
+use <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
 use <%= ABSTRACT_PLUGIN_NAMESPACE %>\Abstract_Plugin;
 
 if ( ! function_exists( 'add_filter' ) ) {
