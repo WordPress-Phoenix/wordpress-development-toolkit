@@ -11,12 +11,6 @@ namespace <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>;
 use <%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Admin;
 use <%= ABSTRACT_PLUGIN_NAMESPACE %>\Abstract_Plugin;
 
-if ( ! function_exists( 'add_filter' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit(); /* protects plugin source from public view */
-}
-
 /**
  * Class Plugin
  */
