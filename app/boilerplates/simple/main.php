@@ -22,11 +22,7 @@
  * License: <%= LICENSE_TEXT %>
  */
 
-if ( ! function_exists( 'add_filter' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit(); /* protects plugin source from public view */
-}
+defined( 'ABSPATH' ) or die(); // wordpress must exist
 
 $current_dir = trailingslashit( dirname( __FILE__ ) );
 
