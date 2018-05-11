@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="timeinc-wp-plugin">
+<ruleset name="<%= DASHES_SLUG %>-wp-plugin">
     <description>Custom plugin codesniffer exceptions.</description>
     <exclude-pattern>vendor/*</exclude-pattern>
     <exclude-pattern>lib/composer/*</exclude-pattern>
