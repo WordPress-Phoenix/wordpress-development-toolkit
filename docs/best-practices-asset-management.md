@@ -1,5 +1,13 @@
 # WordPress Asset Management Best Practices
 
+##### WordPress uses internal functions to register *(`wp_register_script()` & `wp_register_style()`)* and enqueue *(`wp_enqueue_script()` & `wp-enqueue_style()`)* static JavaScript and CSS files so that WordPress Core, Themes and Plugins can **programatically interact with scripts and styles.**
+
+This approach allows WordPress to:
+  1. Load registered dependencies
+  1. Chose the printing order & location of files in the DOM
+  1. Print inline script/style alongside referenced files
+  1. Print inline js variables to make PHP data safely available to the script via the Window variable (`wp_localize_script()` -- originally used for "localizing" translated strings from WordPress language packs into in labels needed in scripts).
+
 #### Break `wp_register_script()` and `wp_register_style()` arguments onto their own lines
 
 This is a matter of preference and judgement, but these registrations are super important, often overrun 80 characters and are worth breaking out to multiple lines for easy locating in files and nice code hygene.
@@ -8,17 +16,20 @@ This is a matter of preference and judgement, but these registrations are super 
 
 Always register CSS and JavaScript first instead of directly enqueueing them. This makes dequeueing easier for other products interacting with your dependency in the environment.
 
-###### Additionally, always register assets globally. Never scope a script registration inside `is_admin()` or another check to prevent registration collision.
+#### Always register assets globally
 
-#### Store dependency handles in accessible variables and constants
+Never scope a script registration inside `is_admin()` or another check to prevent registration collision. Only scope enqueues.
 
-When registering CSS or JS within a PHP class, always store the asset handle as a class variable. When registering a dependency outside a class, define a PHP constant. This allows the entire class and application interact programmatically with the asset, preventing string scavenger hunts across files and easing rename.
+#### Store the string used to register/enqueue an asset in a static class variable or PHP constant
+
+This allows the entire class and application interact programmatically with the asset, preventing string scavenger hunts across files and easing rename.
 
 #### Naming dependency handle slugs
 * **This is a global namespace**. Be creative, be courteous, be concise, be clear and be defensive.
-* Please don't describe the asset with a postfix like `-js`, `-css`, `-script`, `-style` -- WordPress will add postfixes when printing assets in the DOM, resulting in `something-js-js`. However, if a product is called purecss or momentjs, we then use the full slug with repetitive postfix, despite repetion (i.e. `purecss-css`)
-* When appropriate, try to match the filename. This makes life easier and applications scale nicer.
-* Never use WordPress Filters or difficult-to-predict dynamic variables to register asset handles so others may dequeue and register handles with confidence.
+* **Please don't use a postfix like `-js`, `-css`, `-script`, `-style`** -- WordPress will add postfixes when printing assets in the DOM, resulting in `something-js-js`. However, if a product is called purecss or momentjs, we then use the full slug with repetitive postfix, despite repetion (i.e. `purecss-css`)
+* **Try to keep parity between filename and dependency string**. This makes life easier and applications scale nicer.
+* **Plan for growth: avoid calling dependency `my-product`** Use `-primary`, `-core` or `-main` postfix.
+* **Never use WordPress Filters or difficult-to-predict dynamic variables** so others may dequeue and register handles with confidence.
 
 #### Leverage dependency chaining and the `array()` method for `wp_enqueue_*()`
 
@@ -52,4 +63,7 @@ WordPress does little to prevent the collision of scripts. Short of defining dep
 Plus at time of writing it's 2017 and React and Vue-based apps, use of JavaScript tools is becoming more prevalent. Some of these authors create a rollup file of dependencies and a rollup of their app. Even in an environment you control, you likely rely on some 3rd party plugins that load dependencies.
 
 #### Provide a version string for caching
-We recommend tying product assets the version for the Theme or Plugin you're in. Having a condition that checks for local environments (i.e. check request string for ".test") and toggling between a production version and a `rand(0,PHP_INT_MAX)` is another good option.
+We recommend tying product assets the version for the Theme or Plugin you're in. Having a condition that checks for local environments (i.e. check request string for ".test") and toggling between a production version and `time()` is another good option for cache-busting on a local env.
+
+###### NEW: Working with Assets containing cache-hash
+Often when working with JavaScript SPA frameworks and tools, a unique hash is generated in the filename. To account for these assets

@@ -1,6 +1,6 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_3_0\Admin;
+namespace PHX_WP_DEVKIT\V_3_1\Admin;
 
 /**
  * Register and enqueue assets used in the WordPress Admin or only when a user is authenticated here.

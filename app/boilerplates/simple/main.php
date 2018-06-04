@@ -8,7 +8,6 @@
  * @author         <%= AUTHORS %><%= TEAM %>
  * @license        <%= LICENSE_TEXT %>
  * @link           <%= URL %>
- * @version        <%= VERSION %>
  *
  * Built with WP PHX WordPress Development Toolkit v<%= GENERATOR_VERSION %> on <%= CURRENT_TIME %>
  * @link           https://github.com/WordPress-Phoenix/wordpress-development-toolkit
@@ -22,11 +21,7 @@
  * License: <%= LICENSE_TEXT %>
  */
 
-if ( ! function_exists( 'add_filter' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit(); /* protects plugin source from public view */
-}
+defined( 'ABSPATH' ) or die(); // WordPress must exist.
 
 $current_dir = trailingslashit( dirname( __FILE__ ) );
 
@@ -43,4 +38,4 @@ if ( ! class_exists( '<%= ABSTRACT_PLUGIN_NAMESPACE_CHECK %>\\Abstract_Plugin' )
  */
 include_once $current_dir . 'app/class-plugin.php';
 
-< %= PRIMARY_NAMESPACE %>\< %= SECONDARY_NAMESPACE %>\Plugin::run( __FILE__ );
+<%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Plugin::run( __FILE__ );

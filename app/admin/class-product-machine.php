@@ -1,10 +1,10 @@
 <?php
 
-namespace PHX_WP_DEVKIT\V_3_0\Admin;
+namespace PHX_WP_DEVKIT\V_3_1\Admin;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use ZipArchive;
+use \RecursiveDirectoryIterator;
+use \RecursiveIteratorIterator;
+use \ZipArchive;
 
 /**
  * Class Product_Machine
@@ -117,15 +117,6 @@ class Product_Machine {
 				}
 			}
 
-
-
-			// only run these operations for standard plugins
-			// add empties to key directories
-			$blank_file = '<?php ' . PHP_EOL . '// *gentle wave* not the code you\'re looking for..' . PHP_EOL;
-			$idx        = '/index.php';
-			$zip->addFromString( 'app' . $idx, $blank_file );
-			$zip->addFromString( 'app/admin' . $idx, $blank_file );
-
 			// close zip
 			$zip->close();
 
@@ -189,7 +180,8 @@ class Product_Machine {
 			'main.php',
 			'README.md',
 			'composer.json',
-			'app/class-plugin.php'
+			'app/class-plugin.php',
+			'.circleci/codesniffer.ruleset.xml',
 		) );
 
 		if ( in_array( $filename, $important_files ) ) {
@@ -267,4 +259,5 @@ class Product_Machine {
 
 		return null;
 	}
+
 }
