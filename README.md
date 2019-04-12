@@ -25,7 +25,7 @@ How to fill out the New Plugin form:
 ![Form](https://github.com/WordPress-Phoenix/wordpress-development-toolkit/blob/master/plugin-generator-form.png)
 
 
-4. Click Generate New Plugin. This will deliver a new zip file. Check that your namespace has been correctly generated.
+9. Click Generate New Plugin. This will deliver a new zip file. Check that your namespace has been correctly generated.
 
 ## UPDATING `/lib` files
 
