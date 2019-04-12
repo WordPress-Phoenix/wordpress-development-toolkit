@@ -3,14 +3,28 @@
 
 ![Preview](example.png)
 
-1. Download and install plugin (should NOT be run in production environments on high-traffic servers where 
-performance matters...).
+1. Navigate to https://wp.docker/wp-admin/ (ask for login in main channel).
 
-2. Activate plugin
+2. Download and clone this plugin (should NOT be run in production environments on high-traffic servers where 
+performance matters...) into the onecms-docker plugins dir.
 
-3. Open Dev Toolkit in Admin Menu
+3. Navigate to Vanilla WP Network.
 
-4. Generate New Plugin or access resource guides.
+4. Go to Plugins.
+
+5. Network activate plugin.
+
+6. Go back to https://wp.docker/wp-admin/.
+
+7. Open Dev Toolkit from Admin Menu link.
+
+8. Click "Start New Plugin".
+
+How to fill out the New Plugin form:
+
+
+
+4. Click Generate New Plugin. This will deliver a new zip file. Check that your namespace has been correctly generated.
 
 ## UPDATING `/lib` files
 
