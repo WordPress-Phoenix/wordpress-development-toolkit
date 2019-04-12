@@ -27,6 +27,8 @@ How to fill out the New Plugin form:
 
 9. Click Generate New Plugin. This will deliver a new zip file. Check that your namespace has been correctly generated.
 
+10. Follow these instructions: https://github.com/WordPress-Phoenix/abstract-plugin-base#installation
+
 ## UPDATING `/lib` files
 
 Lib files come from composer, but you need to ensure you run the command without the composer autoloader:
