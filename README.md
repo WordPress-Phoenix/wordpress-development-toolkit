@@ -46,8 +46,11 @@ to pull the ABP powering this plugin for internet-less development.
 
 ## FILE PERMISSIONS
 
-You may have 403 issues with these files if you unzip and put it into the plugins directory. 
+You may have 403 issues with these files if you unzip and put it into the plugins directory.
+
 `ls` the directory and see if there's extended attributes on your plugin directory. If so, it will have an `@` sign at the end of its permissions, ie: `drwxr-xr-x@`
+
 To remove the extended attributes: `xattr -rc <directory>`
+
 Apply required permissions: `chmod 755 <file>`
 
