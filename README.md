@@ -5,7 +5,7 @@
 
 1. Navigate to https://wp.docker/wp-admin/ (ask for login in main channel).
 
-2. Download and clone this plugin (should NOT be run in production environments on high-traffic servers where 
+2. Git clone this plugin (should NOT be run in production environments on high-traffic servers where 
 performance matters...) into the onecms-docker plugins dir.
 
 3. Navigate to Vanilla WP Network.
@@ -43,4 +43,11 @@ The plugin uses the GitHub API to fetch the latest copy of the Abstract Plugin B
 define( 'WP_DEV_KIT_AIRPLANE_MODE', true )
 ```
 to pull the ABP powering this plugin for internet-less development.
+
+## FILE PERMISSIONS
+
+You may have 403 issues with these files if you unzip and put it into the plugins directory. 
+`ls` the directory and see if there's extended attributes on your plugin directory. If so, it will have an `@` sign at the end of its permissions, ie: `drwxr-xr-x@`
+To remove the extended attributes: `xattr -rc <directory>`
+Apply required permissions: `chmod 755 <file>`
 
