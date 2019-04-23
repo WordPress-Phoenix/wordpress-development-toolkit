@@ -2,17 +2,34 @@ version: 2
 
 jobs:
   build:
+    environment:
+      WP_MULTISITE: 1
+      WP_TESTS_DIR: /tmp/wordpress-tests-lib
+      WP_CORE_DIR: /tmp/wordpress/
     docker:
       - image: circleci/php:7.1-node-browsers
+      - image: circleci/mysql:5.5.58
     working_directory: ~/repo
     steps:
       - checkout
+      - run: sudo apt-get update; sudo apt-get install mysql-client subversion
+      - run: sudo docker-php-ext-install mysqli
       - run: sudo chmod 777 -R ~
       - run: echo $PWD
       - run: ls -lart
       - run: env COMPOSER=composer-test.json composer install --prefer-source --no-interaction
-      - run: sudo ./bin/phpcs --config-set installed_paths $(readlink -f vendor/wp-coding-standards/wpcs/)
+      - run: sudo ./bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/
       - run: env COMPOSER=composer-test.json composer test
+      - run:
+          name: Installing Tests
+          command: |
+            rm -rf $WP_TESTS_DIR $WP_CORE_DIR
+            bash ./.circleci/install-wp-tests.sh wordpress_test root '' 127.0.0.1 latest
+      - run:
+          name: Running Tests
+          command: |
+            ./bin/phpunit --coverage-clover clover.xml --config ./.circleci/phpunit.xml
+            ./bin/coverage-check clover.xml 80
   notify:
     docker:
       - image: circleci/node:latest

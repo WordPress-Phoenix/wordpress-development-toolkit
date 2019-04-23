@@ -3,6 +3,7 @@
 
 # circle ci
 /lib/*/.circleci
+clover.xml
 
 # composer
 composer.phar
