@@ -12,7 +12,7 @@ performance matters...) into the onecms-docker plugins dir.
 
 4. Go to Plugins.
 
-5. Network activate plugin.
+5. Activate the `WordPress Development Toolkit` plugin.
 
 6. Go back to https://wp.docker/wp-admin/.
 

@@ -37,7 +37,6 @@ class Plugin extends Abstract_Plugin {
 	 */
 	protected static $current_file = __FILE__;
 
-
 	/**
 	 * Initialize the plugin - for public (front end)
 	 *
@@ -51,15 +50,18 @@ class Plugin extends Abstract_Plugin {
 
 	/**
 	 * Initialize public / shared functionality using new Class(), add_action() or add_filter().
+	 *
+	 * @return void
 	 */
 	public function init() {
 		do_action( static::$action_prefix . 'before_init' );
-
 		do_action( static::$action_prefix . 'after_init' );
 	}
 
 	/**
 	 * Initialize functionality only loaded for logged-in users.
+	 *
+	 * @return void
 	 */
 	public function authenticated_init() {
 		if ( is_user_logged_in() ) {
@@ -77,7 +79,7 @@ class Plugin extends Abstract_Plugin {
 	/**
 	 * Defines and Globals.
 	 *
-	 * @return mixed|void
+	 * @return void
 	 */
 	protected function defines_and_globals() {
 	}
