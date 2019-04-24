@@ -16,6 +16,8 @@ jobs:
       - run: sudo docker-php-ext-install mysqli
       - run: sudo chmod 777 -R ~
       - run: echo $PWD
+      - run: echo $WP_TESTS_DIR
+      - run: echo $WP_CORE_DIR
       - run: ls -lart
       - run: env COMPOSER=composer-test.json composer install --prefer-source --no-interaction
       - run: sudo ./bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/
@@ -29,7 +31,7 @@ jobs:
           name: Running Tests
           command: |
             ./bin/phpunit --coverage-clover clover.xml --config ./.circleci/phpunit.xml
-            ./bin/coverage-check clover.xml 80
+            ./bin/coverage-check clover.xml 90
   notify:
     docker:
       - image: circleci/node:latest
