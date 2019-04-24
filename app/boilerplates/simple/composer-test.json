@@ -5,12 +5,12 @@
   },
   "require-dev": {
 	"wp-coding-standards/wpcs": "^0.10",
-    "rregeer/phpunit-coverage-check": "^0.1.6",
-    "phpunit/phpunit": "^6"
+	"rregeer/phpunit-coverage-check": "^0.1.6",
+	"phpunit/phpunit": "^6"
   },
   "scripts": {
 	"test": "./bin/phpcs --standard=./.circleci/codesniffer.ruleset.xml --extensions='php,css' ./",
-    "fix": "./bin/phpcbf --standard=./.circleci/codesniffer.ruleset.xml --extensions='php,js,css' --ignore=*/lib/* ./",
-    "phpunit": "./bin/phpunit --stop-on-error"
+	"fix": "./bin/phpcbf --standard=./.circleci/codesniffer.ruleset.xml --extensions='php,js,css' --ignore=*/lib/* ./",
+	"phpunit": "./bin/phpunit --stop-on-error"
   }
 }

@@ -41,7 +41,7 @@ class App {
 	 * @param string $installed_url Installed URL.
 	 * @param string $version       Version.
 	 */
-	function __construct( $installed_dir, $installed_url, $version ) {
+	public function __construct( $installed_dir, $installed_url, $version ) {
 		$this->installed_dir = $installed_dir;
 		$this->installed_url = $installed_url;
 		$this->version       = $version;
