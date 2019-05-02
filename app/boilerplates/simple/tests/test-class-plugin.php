@@ -17,6 +17,7 @@ final class Plugin_Test extends WP_UnitTestCase {
 	 */
 	public function test_onload() {
 		$instance = new stdClass();
+
 		$plugin   = new \<%= PRIMARY_NAMESPACE %>\<%= SECONDARY_NAMESPACE %>\Plugin();
 		$result   = $plugin->onload( $instance );
 
