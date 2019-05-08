@@ -6,7 +6,7 @@
 1. Navigate to https://wp.docker/wp-admin/ (ask for login in main channel).
 
 2. Download and clone this plugin (should NOT be run in production environments on high-traffic servers where 
-performance matters...) into the onecms-docker plugins dir.
+performance matters...) into the plugins dir. Do not try to upload the zip file into the Add New plugin uploader. This feature is not supported.
 
 3. Navigate to Vanilla WP Network.
 
