@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "WordPress-Phoenix/abstract-plugin-base": "^2.5",
+    "wordpress-phoenix/abstract-plugin-base": "^2.5",
     "php": ">=5.3.2",
     "composer/installers": "v1.0.6"
   },
