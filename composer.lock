@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "368cfe0e29b59b314f2c13a38b3afb23",
+    "content-hash": "5cf6f50cc29753ba7bdab33a9b178429",
     "packages": [
         {
             "name": "composer/installers",
@@ -77,29 +77,36 @@
                 "wordpress",
                 "zend"
             ],
+            "support": {
+                "issues": "https://github.com/composer/installers/issues",
+                "source": "https://github.com/composer/installers/tree/master"
+            },
             "time": "2013-08-20T04:37:09+00:00"
         },
         {
             "name": "wordpress-phoenix/abstract-plugin-base",
-            "version": "2.6.2",
+            "version": "2.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress-Phoenix/abstract-plugin-base.git",
-                "reference": "b10c5dce1943fd78b8cfd5cbe6b78863d7a2f7e9"
+                "reference": "5092f969e45dff408b1a972154a03c0d8e70f19e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress-Phoenix/abstract-plugin-base/zipball/b10c5dce1943fd78b8cfd5cbe6b78863d7a2f7e9",
-                "reference": "b10c5dce1943fd78b8cfd5cbe6b78863d7a2f7e9",
+                "url": "https://api.github.com/repos/WordPress-Phoenix/abstract-plugin-base/zipball/5092f969e45dff408b1a972154a03c0d8e70f19e",
+                "reference": "5092f969e45dff408b1a972154a03c0d8e70f19e",
                 "shasum": ""
+            },
+            "require-dev": {
+                "automattic/vipwpcs": "^0.4.0",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "wp-coding-standards/wpcs": "^1.2.0"
             },
             "type": "library",
             "autoload": {
-                "classmap": {
-                    "classmap": [
-                        "src/abstract-plugin.php"
-                    ]
-                }
+                "classmap": [
+                    "src/abstract-plugin.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -122,7 +129,11 @@
                 "standardize",
                 "wordpress"
             ],
-            "time": "2018-03-21T23:50:31+00:00"
+            "support": {
+                "issues": "https://github.com/WordPress-Phoenix/abstract-plugin-base/issues",
+                "source": "https://github.com/WordPress-Phoenix/abstract-plugin-base/tree/2.6.4"
+            },
+            "time": "2020-03-05T16:42:28+00:00"
         }
     ],
     "packages-dev": [],
@@ -134,5 +145,6 @@
     "platform": {
         "php": ">=5.3.2"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }

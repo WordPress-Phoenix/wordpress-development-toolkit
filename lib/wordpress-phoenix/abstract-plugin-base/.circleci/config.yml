@@ -7,12 +7,17 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: sudo chmod 777 -R ~
-      - run: echo $PWD
-      - run: ls -lart
-      - run: env COMPOSER=composer-test.json composer install --prefer-source --no-interaction
-      - run: sudo ./bin/phpcs --config-set installed_paths $(readlink -f vendor/wp-coding-standards/wpcs/)
-      - run: env COMPOSER=composer-test.json composer test
+      - run:
+          name: Prepare CLI
+          command: sudo chmod 777 -R ~ ; echo $PWD ; ls -lart ;
+      - run:
+          name: Install Testing Dependencies
+          command: |
+            composer install --prefer-source --no-interaction
+      - run:
+          name: Running Tests
+          command: |
+            composer lint:check
   notify:
     docker:
       - image: circleci/node:latest

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<ruleset name="wpphx">
+	<description>phpcs ruleset, based on WordPress Core and VIP standards.</description>
+
+	<!-- Exclude specific Composer-related directories from linting. -->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/lib/index.php</exclude-pattern>
+	<exclude-pattern>*/lib/autoload.php</exclude-pattern>
+	<exclude-pattern>*/lib/bin/*</exclude-pattern>
+	<exclude-pattern>*/lib/composer/*</exclude-pattern>
+
+	<!-- Exclude static assets from linting. -->
+	<exclude-pattern>*/assets/*</exclude-pattern>
+	<exclude-pattern>*\.(css|js|xml)</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+
+	<!-- Don't fail in CI if there are warnings. -->
+	<config name="ignore_warnings_on_exit" value="1" />
+
+	<!-- Only worry about WordPress 5.0+. -->
+	<config name="minimum_supported_wp_version" value="5.0" />
+
+	<rule ref="WordPress">
+		<exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found" />
+	</rule>
+
+	<rule ref="WordPress-Core"></rule>
+
+	<rule ref="WordPress-VIP">
+		<exclude name="WordPress.VIP.SuperGlobalInputUsage" />
+		<exclude name="WordPress.VIP.RestrictedFunctions.switch_to_blog" />
+		<exclude name="WordPress.VIP.RestrictedFunctions.get_page_by_title" />
+		<exclude name="WordPress.VIP.RestrictedFunctions.get_page_by_title_get_page_by_title" />
+	</rule>
+
+	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
+		<exclude-pattern>/lib/*</exclude-pattern>
+		<exclude-pattern>/src/*</exclude-pattern>
+	</rule>
+
+	<!-- Prevent empty lines at the start or end of control structures. -->
+	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
+		<properties>
+			<property name="blank_line_check" value="true" />
+		</properties>
+	</rule>
+</ruleset>

@@ -194,7 +194,6 @@ abstract class Abstract_Plugin {
 
 		// Hook can be used by mu plugins to modify plugin behavior after plugin is setup.
 		do_action( $this->wp_hook_pre . '_setup', $this );
-
 	} // END public function __construct
 
 	/**
@@ -228,6 +227,7 @@ abstract class Abstract_Plugin {
 		$intersect            = array_intersect_assoc( $parent, $class_array );
 		$intersect_depth      = count( $intersect );
 		$autoload_match_depth = static::$autoload_ns_match_depth;
+
 		// Confirm $class is in same namespace as this autoloader.
 		if ( $intersect_depth >= $autoload_match_depth ) {
 			$file = $this->get_file_name_from_class( $class );
@@ -239,7 +239,6 @@ abstract class Abstract_Plugin {
 				$this->load_file( $this->installed_dir . $file );
 			}
 		}
-
 	}
 
 	/**
@@ -261,7 +260,7 @@ abstract class Abstract_Plugin {
 		if ( file_exists( $this->plugin_file ) ) {
 			$this->installed_url = plugins_url( '/', $this->plugin_file );
 			// Ensure get_plugin_data is available.
-			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 			$this->plugin_data = get_plugin_data( $this->plugin_file, $markup = true, $translate = true );
 			if ( is_array( $this->plugin_data ) && isset( $this->plugin_data['Version'] ) ) {
 				$this->version = $this->plugin_data['Version'];
@@ -363,10 +362,9 @@ abstract class Abstract_Plugin {
 			$class_filename      = str_replace( '_', '-', $class_filename );
 
 			return static::$filename_prefix . $class_filename . '.php';
-		} else {
-
-			return $this->psr4_get_file_name_from_class( $class );
 		}
+
+		return $this->psr4_get_file_name_from_class( $class );
 	}
 
 	/**
@@ -398,7 +396,7 @@ abstract class Abstract_Plugin {
 	 */
 	private function load_file( $path ) {
 		if ( $path && is_readable( $path ) ) {
-			include_once( $path );
+			include_once $path;
 			$success = true;
 		}
 
